@@ -1,7 +1,7 @@
 import {scaleLinear} from "d3-scale";
 
 export const ds = {
-  logoSize: 40,
+  logoSize: 36,
   space: 12,
 };
 

@@ -3,21 +3,39 @@ import {ds, colorScale} from "../designSystem";
 import logos from "../data/logos";
 import {calculateScore} from "../data/scores";
 import {getTeam} from "../data/teams";
+import {timeFormat} from "d3-time-format";
+
+export const formatTime = timeFormat("%H:%M");
 
 const gridStyle = {
   display: "grid",
-  gridTemplateRows: "auto auto",
-  gridTemplateColumns: "1fr 1fr auto",
-  marginBottom: ds.space * 3,
-  gridGap: ds.space,
+  gridTemplateColumns: `45px ${ds.logoSize}px 1fr auto`,
+  gridTemplateRows: `auto auto`,
+  marginBottom: ds.space * 2.5,
+  alignItems: "center",
+  gridColumnGap: ds.space,
+  gridRowGap: ds.space / 3,
 };
 
-const LogoPlaceholder = () => (<div style={{
-  width: ds.logoSize,
-  height: ds.logoSize,
-  borderRadius: ds.logoSize / 2,
-  boxShadow: "0px 0px 1px rgba(0, 0, 0, 0.2)",
-}} />);
+const timeStyle = {color: "rgba(0, 0, 0, 0.4)"};
+const teamNameStyle = {fontWeight: "600", minWidth: 60};
+const scoreStyle = {
+  gridArea: "1 / 4 / 3 / 5",
+  paddingLeft: ds.space * 2,
+  alignSelf: "flex-start",
+  fontSize: 24,
+  lineHeight: 1.55,
+  fontWeight: "600",
+};
+
+const LogoPlaceholder = () => (
+  <div style={{
+    width: ds.logoSize,
+    height: ds.logoSize,
+    borderRadius: ds.logoSize / 2,
+    boxShadow: "0px 0px 1px rgba(0, 0, 0, 0.2)",
+  }} />
+);
 const Logo = ({triCode}) => (
   <img
     style={{display: "block"}}
@@ -34,25 +52,36 @@ export const GamePreview = (props) => {
   const hTeamData = getTeam(hTeam.triCode);
   const vTeamData = getTeam(vTeam.triCode);
   const score = calculateScore(gameExcitement);
+  const time = new Date(gameData.startTimeUTC);
+  const tooltip = gameExcitement
+    ? `GameExcitement is ${(gameExcitement / 1000).toFixed(3)}, it's higher than ${score * 10}% games in 2014—2018`
+    : "";
+
+  console.log(time);
 
   return (
     <div style={gridStyle}>
+      <div style={timeStyle}>{formatTime(time)}</div>
       <div>
         {logos[`${vTeam.triCode}_logo`]
           ? <Logo triCode={vTeam.triCode} />
           : <LogoPlaceholder />}
       </div>
+      <div style={teamNameStyle}>{vTeamData ? vTeamData.nickname : vTeam.triCode}</div>
+      <div />
       <div>
         {logos[`${hTeam.triCode}_logo`]
           ? <Logo triCode={hTeam.triCode} />
           : <LogoPlaceholder />}
       </div>
-      <div></div>
-      <div>{vTeamData ? vTeamData.nickname : vTeam.triCode}</div>
-      <div>{hTeamData ? hTeamData.nickname : hTeam.triCode}</div>
+
+      <div style={teamNameStyle}>{hTeamData ? hTeamData.nickname : hTeam.triCode}</div>
       <div
-        style={{fontWeight: "bold", color: gameExcitement ? colorScale(score) : "inherit"}}
-        title={`GameExcitement is ${(gameExcitement / 1000).toFixed(3)}, it's higher than ${score * 10}% games in 2014—2018`}>{gameExcitement ? score.toFixed(1) : "—"}
+        style={{
+          ...scoreStyle,
+          color: gameExcitement ? colorScale(score) : "#CCC",
+        }}
+        title={tooltip}>{gameExcitement ? score.toFixed(1) : "_._"}
       </div>
     </div>
   );
@@ -61,16 +90,23 @@ export const GamePreview = (props) => {
 export const GamePreviewLoader = ({opacity}) => {
   return (
     <div style={{opacity, ...gridStyle}}>
+      <div style={timeStyle}>--:--</div>
       <div>
         <LogoPlaceholder />
       </div>
+      <div style={teamNameStyle}>|||||||||||||||||||||||||</div>
+      <div />
       <div>
         <LogoPlaceholder />
       </div>
-      <div></div>
-      <div>...</div>
-      <div>...</div>
-      <div style={{fontWeight: "bold"}}>—</div>
+
+      <div style={teamNameStyle}>|||||||||||||||||||||</div>
+      <div
+        style={{
+          ...scoreStyle,
+          color: "#CCC",
+        }}>_._
+      </div>
     </div>
   );
 };

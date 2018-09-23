@@ -1,29 +1,17 @@
 import {timeFormat, timeParse} from "d3-time-format";
 import React from "react";
-import {Link} from "react-router-dom";
-import {getPrevNextDays} from "../data/games";
-import {gamesCount} from "../data/games.js";
 import {ds} from "../designSystem";
 import {GamePreview, GamePreviewLoader} from "./GamePreview";
+import {Nav} from "./Nav";
 
-// const serverUrl = "https://nba-game-excitement.herokuapp.com";
-const serverUrl = "http://localhost:5000";
+const serverUrl = "https://nba-game-excitement.herokuapp.com";
+// const serverUrl = "http://localhost:5000";
 
 const inputDate = "%Y%m%d";
 const outputDate = "%b %d, %Y";
 const parseUrlTime = timeParse(inputDate);
-const formatUrlTime = timeFormat(inputDate);
+export const formatUrlTime = timeFormat(inputDate);
 const formatTime = timeFormat(outputDate);
-
-const Nav = ({date}) => {
-
-  const {nextDay, prevDay} = getPrevNextDays({date, gamesCount});
-  return (<div>
-    {prevDay ? <Link to={prevDay}>Prev</Link> : <span>Prev</span>}
-    {" "}
-    {nextDay ? <Link to={nextDay}>Next</Link> : <span>Next</span>}
-  </div>);
-};
 
 const initialState = {
   loaded: false,
@@ -61,7 +49,8 @@ export class Schedule extends React.PureComponent {
     return (
       <div style={{padding: ds.space * 4}}>
         <Nav date={formatUrlTime(date)} />
-        <h1>{formatTime(date)}</h1>
+        <div style={{fontSize: 24, marginBottom: ds.space * 3, fontWeight: "600"}}>{formatTime(date)}</div>
+        <div style={{display: "inline-flex", flexDirection: "column", minWidth: 280}}>
         {
           loaded
             ? data.length > 0
@@ -75,6 +64,7 @@ export class Schedule extends React.PureComponent {
               <GamePreviewLoader opacity={0.2} />
             </React.Fragment>
         }
+        </div>
       </div>
     );
   }
