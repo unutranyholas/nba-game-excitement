@@ -52,7 +52,7 @@ export const GamePreview = (props) => {
       <div>{hTeamData ? hTeamData.nickname : hTeam.triCode}</div>
       <div
         style={{fontWeight: "bold", color: gameExcitement ? colorScale(score) : "inherit"}}
-        title={`GameExcitement is ${gameExcitement}`}>{gameExcitement ? score.toFixed(1) : "—"}
+        title={`GameExcitement is ${(gameExcitement / 1000).toFixed(3)}, it's higher than ${score * 10}% games in 2014—2018`}>{gameExcitement ? score.toFixed(1) : "—"}
       </div>
     </div>
   );

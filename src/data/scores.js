@@ -1,5 +1,5 @@
 export const calculateScore = (gameExcitement) => {
-  return (scores.find(({border}) => gameExcitement < border).score || 100) / 10;
+  return ((scores.find(({border}) => gameExcitement < border).score || 100) - 1) / 10;
 };
 
 const scores = [

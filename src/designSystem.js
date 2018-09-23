@@ -11,6 +11,6 @@ export const colorScale = scaleLinear()
     "#C3C3C3",
     "#93B7ED",
     "#72cc19",
-    "#f3ee29",
+    "#f3b100",
     "#FF2E00",
   ]);

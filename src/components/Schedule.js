@@ -1,10 +1,10 @@
+import {timeFormat, timeParse} from "d3-time-format";
 import React from "react";
+import {Link} from "react-router-dom";
+import {getPrevNextDays} from "../data/games";
+import {gamesCount} from "../data/games.js";
 import {ds} from "../designSystem";
 import {GamePreview, GamePreviewLoader} from "./GamePreview";
-import {timeParse, timeFormat} from "d3-time-format";
-import {Link} from "react-router-dom";
-
-import {timeDay} from "d3-time";
 
 // const serverUrl = "https://nba-game-excitement.herokuapp.com";
 const serverUrl = "http://localhost:5000";
@@ -16,10 +16,12 @@ const formatUrlTime = timeFormat(inputDate);
 const formatTime = timeFormat(outputDate);
 
 const Nav = ({date}) => {
+
+  const {nextDay, prevDay} = getPrevNextDays({date, gamesCount});
   return (<div>
-    <Link to={formatUrlTime(timeDay.offset(date, -1))}>Prev</Link>
+    {prevDay ? <Link to={prevDay}>Prev</Link> : <span>Prev</span>}
     {" "}
-    <Link to={formatUrlTime(timeDay.offset(date, 1))}>Next</Link>
+    {nextDay ? <Link to={nextDay}>Next</Link> : <span>Next</span>}
   </div>);
 };
 
@@ -58,7 +60,7 @@ export class Schedule extends React.PureComponent {
 
     return (
       <div style={{padding: ds.space * 4}}>
-        <Nav date={date} />
+        <Nav date={formatUrlTime(date)} />
         <h1>{formatTime(date)}</h1>
         {
           loaded
