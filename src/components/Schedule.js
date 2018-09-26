@@ -1,7 +1,7 @@
 import {timeFormat, timeParse} from "d3-time-format";
 import React from "react";
-import {ds} from "../designSystem";
 import {GamePreview, GamePreviewLoader} from "./GamePreview";
+import {getSeasonStageName} from "../data/games.js";
 import {Nav} from "./Nav";
 
 const serverUrl = "https://nba-game-excitement.herokuapp.com";
@@ -47,23 +47,24 @@ export class Schedule extends React.PureComponent {
       : new Date();
 
     return (
-      <div style={{padding: ds.space * 4}}>
+      <div>
         <Nav date={formatUrlTime(date)} />
-        <div style={{fontSize: 24, marginBottom: ds.space * 3, fontWeight: "600"}}>{formatTime(date)}</div>
-        <div style={{display: "inline-flex", flexDirection: "column", minWidth: 280}}>
-        {
-          loaded
-            ? data.length > 0
-            ? data.map((game) => <GamePreview key={game.gameId} game={game} />)
-            : (<div>No games on this day</div>)
-            : <React.Fragment>
-              <GamePreviewLoader opacity={1} />
-              <GamePreviewLoader opacity={0.8} />
-              <GamePreviewLoader opacity={0.6} />
-              <GamePreviewLoader opacity={0.4} />
-              <GamePreviewLoader opacity={0.2} />
-            </React.Fragment>
-        }
+        <h3>{getSeasonStageName(match.params.date)}</h3>
+        <h2>{formatTime(date)}</h2>
+        <div>
+          {
+            loaded
+              ? data.length > 0
+              ? data.map((game) => <GamePreview key={game.gameId} game={game} />)
+              : (<div>No games on this day</div>)
+              : <React.Fragment>
+                <GamePreviewLoader opacity={1} />
+                <GamePreviewLoader opacity={0.8} />
+                <GamePreviewLoader opacity={0.6} />
+                <GamePreviewLoader opacity={0.4} />
+                <GamePreviewLoader opacity={0.2} />
+              </React.Fragment>
+          }
         </div>
       </div>
     );

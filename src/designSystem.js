@@ -6,11 +6,9 @@ export const ds = {
 };
 
 export const colorScale = scaleLinear()
-  .domain([2, 4, 6, 8, 10])
+  .domain([1, 5, 9])
   .range([
-    "#C3C3C3",
-    "#93B7ED",
-    "#72cc19",
-    "#f3b100",
+    "#588ac3",
+    "#c651cc",
     "#FF2E00",
   ]);

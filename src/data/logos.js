@@ -28,6 +28,7 @@ import SAS_logo from "./nba-team-logos/SAS_logo.svg";
 import TOR_logo from "./nba-team-logos/TOR_logo.svg";
 import UTA_logo from "./nba-team-logos/UTA_logo.svg";
 import WAS_logo from "./nba-team-logos/WAS_logo.svg";
+import NBA_logo from "./nba-team-logos/NBA_logo.svg";
 
 export default {
   ATL_logo,
@@ -60,4 +61,5 @@ export default {
   TOR_logo,
   UTA_logo,
   WAS_logo,
+  NBA_logo,
 };

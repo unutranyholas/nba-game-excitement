@@ -9,7 +9,7 @@ export const formatTime = timeFormat("%H:%M");
 
 const gridStyle = {
   display: "grid",
-  gridTemplateColumns: `45px ${ds.logoSize}px 1fr auto`,
+  gridTemplateColumns: `auto ${ds.logoSize}px 1fr auto`,
   gridTemplateRows: `auto auto`,
   marginBottom: ds.space * 2.5,
   alignItems: "center",
@@ -17,15 +17,18 @@ const gridStyle = {
   gridRowGap: ds.space / 3,
 };
 
-const timeStyle = {color: "rgba(0, 0, 0, 0.4)"};
+const timeStyle = {
+  color: "rgba(0, 0, 0, 0.4)",
+  fontFeatureSettings: "tnum",
+};
 const teamNameStyle = {fontWeight: "600", minWidth: 60};
 const scoreStyle = {
   gridArea: "1 / 4 / 3 / 5",
   paddingLeft: ds.space * 2,
   alignSelf: "flex-start",
-  fontSize: 24,
   lineHeight: 1.55,
   fontWeight: "600",
+  fontFeatureSettings: "\"tnum\", \"zero\"",
 };
 
 const LogoPlaceholder = () => (
@@ -56,8 +59,6 @@ export const GamePreview = (props) => {
   const tooltip = gameExcitement
     ? `GameExcitement is ${(gameExcitement / 1000).toFixed(3)}, it's higher than ${score * 10}% games in 2014—2018`
     : "";
-
-  console.log(time);
 
   return (
     <div style={gridStyle}>
