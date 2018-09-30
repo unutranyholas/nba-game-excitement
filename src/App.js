@@ -1,7 +1,7 @@
 import React from "react";
-import {BrowserRouter as Router, Redirect, Route, NavLink, Switch} from "react-router-dom";
+import {BrowserRouter as Router, Redirect, Route, /*NavLink, */Switch} from "react-router-dom";
 import {Schedule} from "./components/Schedule";
-import logos from "./data/logos";
+// import logos from "./data/logos";
 
 const Info = () => <h2>Info</h2>;
 const Charts = () => <h2>Charts</h2>;
