@@ -1,5 +1,6 @@
 import React from "react";
 import {BrowserRouter as Router, Redirect, Route, /*NavLink, */Switch} from "react-router-dom";
+import {Title, SubTitle} from "./components/Basic";
 import {Schedule} from "./components/Schedule";
 // import logos from "./data/logos";
 
@@ -12,8 +13,8 @@ export const App = () => (
     <Router>
       <div>
         {/*<img src={logos["NBA_logo"]} height="40" />*/}
-        <h1>NBA Game Excitement Score</h1>
-        <p>Choose games worth to watch without spoilers</p>
+        <Title>NBA Game Excitement Score</Title>
+        <SubTitle>Choose games worth to watch without spoilers</SubTitle>
         {/*<ul>*/}
         {/*<li><NavLink to="/games/">Games</NavLink></li>*/}
         {/*<li><NavLink to="/info/">Info</NavLink></li>*/}

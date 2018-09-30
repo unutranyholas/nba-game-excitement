@@ -2,6 +2,7 @@ import {timeFormat, timeParse} from "d3-time-format";
 import React from "react";
 import {getGameIds} from "../data/games";
 import {getSeasonStageName} from "../data/games.js";
+import {SeasonStage, DateHeader} from "./Basic";
 import {GamePreview} from "./GamePreview";
 import {Nav} from "./Nav";
 
@@ -19,20 +20,18 @@ export class Schedule extends React.PureComponent {
       ? parseUrlTime(match.params.date)
       : new Date();
 
-    const gameIds = getGameIds(match.params.date);
+    const gameIds = getGameIds(formatUrlTime(date));
 
     return (
       <div>
         <Nav date={formatUrlTime(date)} />
-        <h3>{getSeasonStageName(match.params.date)}</h3>
-        <h2>{formatTime(date)}</h2>
-        <div>
+        <SeasonStage>{getSeasonStageName(match.params.date)}</SeasonStage>
+        <DateHeader>{formatTime(date)}</DateHeader>
           {
             gameIds.length > 0
               ? gameIds.map((gameId) => <GamePreview key={gameId} gameId={gameId} />)
               : (<div>No games on this day</div>)
           }
-        </div>
       </div>
     );
   }
