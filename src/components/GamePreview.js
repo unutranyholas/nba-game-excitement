@@ -7,8 +7,8 @@ import {Logo, LogoPlaceholder, PreviewLayout, Score, TeamName, Time} from "./Bas
 
 export const formatTime = timeFormat("%H:%M");
 
-const serverUrl = "http://localhost:5000";
-// const serverUrl = "https://nba-game-excitement.herokuapp.com";
+// const serverUrl = "http://localhost:5000";
+const serverUrl = "https://nba-game-excitement.herokuapp.com";
 
 const initialState = {
   loaded: false,
@@ -66,7 +66,7 @@ export class GamePreview extends React.Component {
             : <LogoPlaceholder />}
         </div>
         <TeamName>{hTeamData ? hTeamData.nickname : hTeam.triCode}</TeamName>
-        <div style={{gridArea: "1 / 4 / 3 / 5"}}>
+        <div style={{gridArea: "1 / 4 / 3 / 5", alignSelf: "flex-start"}}>
           <Score
             value={gameExcitement ? score : null}
             title={tooltip}
@@ -86,13 +86,13 @@ export const GamePreviewLoader = () => {
       <div>
         <LogoPlaceholder />
       </div>
-      <TeamName>|||||||||||||||||||||||||</TeamName>
+      <TeamName>||||||||||||||</TeamName>
       <div />
       <div>
         <LogoPlaceholder />
       </div>
-      <TeamName>|||||||||||||||||||||</TeamName>
-      <div style={{gridArea: "1 / 4 / 3 / 5"}}>
+      <TeamName>|||||||||||</TeamName>
+      <div style={{gridArea: "1 / 4 / 3 / 5", alignSelf: "flex-start"}}>
         <Score>_._</Score>
       </div>
     </PreviewLayout>

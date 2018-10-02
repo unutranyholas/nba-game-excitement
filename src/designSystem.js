@@ -1,14 +1,18 @@
 import {scaleLinear} from "d3-scale";
+import {interpolateCubehelix} from "d3-interpolate";
 
 export const ds = {
   logoSize: 36,
-  space: 12,
+  rem: (x) => `${x / 16}rem`,
+  space: 16,
 };
 
 export const colorScale = scaleLinear()
-  .domain([1, 5, 9])
+  .domain([0, 5, 10])
   .range([
-    "#588ac3",
-    "#c651cc",
-    "#FF2E00",
-  ]);
+    "#808080",
+    "#597ac8",
+    "#ff3d00",
+    "#c63bcd",
+  ])
+  .interpolate(interpolateCubehelix);

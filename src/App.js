@@ -13,8 +13,15 @@ export const App = () => (
     <Router>
       <div>
         {/*<img src={logos["NBA_logo"]} height="40" />*/}
-        <Title>NBA Game Excitement Score</Title>
-        <SubTitle>Choose games worth to watch without spoilers</SubTitle>
+        <div style={{
+          padding: 40,
+          background: "linear-gradient(-150deg, #597ac8, #B45ABF, #ff3d00)",
+          marginBottom: 20,
+          borderRadius: 8,
+        }}>
+          <Title>NBA Game Excitement Score</Title>
+          <SubTitle>Choose games worth to watch without spoilers</SubTitle>
+        </div>
         {/*<ul>*/}
         {/*<li><NavLink to="/games/">Games</NavLink></li>*/}
         {/*<li><NavLink to="/info/">Info</NavLink></li>*/}
