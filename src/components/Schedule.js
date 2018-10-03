@@ -25,7 +25,12 @@ export class Schedule extends React.PureComponent {
 
     return (
       <div style={{padding: `${ds.rem(ds.space)}`, maxWidth: 1000, margin: "0 auto"}}>
-        <div style={{display: "grid", gridTemplateColumns: "2fr 1fr", alignItems: "center", marginBottom: ds.rem(ds.space)}}>
+        <div style={{
+          display: "grid",
+          gridTemplateColumns: "2fr 1fr",
+          alignItems: "center",
+          marginBottom: ds.rem(ds.space),
+        }}>
           <div style={{marginLeft: ds.rem(ds.space)}}>
             <SeasonStage>{getSeasonStageName(match.params.date)}</SeasonStage>
             <DateHeader>{formatTime(date)}</DateHeader>
