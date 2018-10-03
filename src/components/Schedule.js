@@ -24,17 +24,19 @@ export class Schedule extends React.PureComponent {
     const gameIds = getGameIds(formatUrlTime(date));
 
     return (
-      <div>
-        <div style={{display: "flex", flexDirection: "row", justifyContent: "space-between"}}>
-          <div style={{marginLeft: ds.space}}>
+      <div style={{padding: `${ds.rem(ds.space)}`, maxWidth: 1000, margin: "0 auto"}}>
+        <div style={{display: "grid", gridTemplateColumns: "2fr 1fr", alignItems: "center", marginBottom: ds.rem(ds.space)}}>
+          <div style={{marginLeft: ds.rem(ds.space)}}>
             <SeasonStage>{getSeasonStageName(match.params.date)}</SeasonStage>
             <DateHeader>{formatTime(date)}</DateHeader>
           </div>
-          <div style={{display: "flex", flexWrap: "wrap", flexDirection: "row"}}>
-            <Nav date={formatUrlTime(date)} />
-          </div>
+          <Nav date={formatUrlTime(date)} />
         </div>
-        <div style={{display: "flex", flexWrap: "wrap"}}>
+        <div style={{
+          display: "grid",
+          gridTemplateColumns: `repeat(auto-fill, minmax(${ds.rem(300)}, 1fr))`,
+          gridGap: ds.rem(ds.space),
+        }}>
           {
             gameIds.length > 0
               ? gameIds.map((gameId) => <GamePreview key={gameId} gameId={gameId} />)

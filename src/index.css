@@ -1,9 +1,16 @@
-body {
+html {
     font-family: "Space Grotesk";
     font-feature-settings: "tnum", "ss01", "ss02", "ss04", "case";
     font-size: 16px;
     color: #000000;
     background-color: #FFFFFF;
-    margin: 0 auto;
-    padding: 2em;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+}
+
+* {
+    box-sizing: border-box;
 }

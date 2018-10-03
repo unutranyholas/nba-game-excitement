@@ -3,20 +3,28 @@ import styled, {css} from "styled-components";
 import logos from "../data/logos";
 import {colorScale, ds} from "../designSystem";
 
+export const Header = styled.div`
+  padding: ${ds.rem(ds.space * 2)} 0;
+  background: linear-gradient(-150deg, #597ac8, #B45ABF, #ff3d00);
+  margin-bottom: ${ds.rem(ds.space)};
+`;
+
 export const Title = styled.div`
   font-weight: 700;
   font-size: ${ds.rem(32)};
-  margin: 0 0 ${ds.rem(ds.space / 4)};
-  padding: 0;
+  margin: 0 auto ${ds.rem(ds.space / 4)};
+  padding: 0 ${ds.rem(ds.space * 2)};
   color: white;
   line-height: 1;
+  max-width: 1000px;
 `;
 
 export const SubTitle = styled.div`
   font-size: ${ds.rem(16)};
-  margin: 0;
-  padding: 0;
+  margin: 0 auto;
+  padding: 0 ${ds.rem(ds.space * 2)};
   color: white;
+  max-width: 1000px;
 `;
 
 export const Time = styled.div`
@@ -27,23 +35,37 @@ export const Time = styled.div`
 `;
 
 export const LinkWrapper = styled.div`
-  font-size: ${ds.rem(12)};
-  text-transform: uppercase;
-  letter-spacing: ${ds.rem(3)};
+  font-size: ${ds.rem(16)};
   font-weight: 400;
-  margin: 0 ${ds.rem(16)} 0 0;
-  padding: 0;
+  font-feature-settings: "tnum";
+  box-shadow: 0 0 1px rgba(0, 0, 0, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  line-height: 1;
+  color: #CCC;
+  padding: ${ds.rem(ds.space / 2)} ${ds.rem(ds.space)};
+  & a {
+    text-decoration: none;
+    color: #000;
+  };
+  ${({first}) => first ? css`
+    border-top-left-radius: ${ds.rem(ds.space / 4)};
+    border-bottom-left-radius: ${ds.rem(ds.space / 4)};
+  ` : null}
+  ${({last}) => last ? css`
+    border-top-right-radius: ${ds.rem(ds.space / 4)};
+    border-bottom-right-radius: ${ds.rem(ds.space / 4)};
+  ` : null}  
 `;
 
 export const PreviewLayout = styled.div`
   display: grid;
-  grid-template-columns: auto ${ds.logoSize}px 1fr auto;
+  grid-template-columns: auto ${ds.rem(ds.logoSize)} 1fr auto;
   grid-template-rows: auto auto;
   align-items: center;
   grid-gap: ${ds.rem(ds.space / 4)};
-  margin-bottom: ${ds.rem(ds.space)};
-  margin-right: ${ds.rem(ds.space)};
-  min-width: ${ds.rem(300)};
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
   padding: ${ds.rem(ds.space / 3 * 2)} ${ds.rem(ds.space)};
   border-radius: ${ds.rem(ds.space / 4)};
@@ -82,15 +104,12 @@ export const SeasonStage = styled.div`
 export const DateHeader = styled.div`
   font-size: ${ds.rem(24)};
   font-weight: 700;
-  margin-bottom: ${ds.rem(ds.space)};
   padding: 0;
 `;
 
 export const Logo = ({triCode}) => (
   <img
-    style={{display: "block"}}
+    style={{display: "block", width: ds.rem(ds.logoSize), height: ds.rem(ds.logoSize)}}
     alt={triCode}
     src={logos[`${triCode}_logo`]}
-    width={ds.logoSize}
-    height={ds.logoSize}
   />);

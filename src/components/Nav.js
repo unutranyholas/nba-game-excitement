@@ -14,10 +14,14 @@ export const Nav = ({date}) => {
   const {nextDay, prevDay} = getPrevNextDays({date, gamesCount});
   const today = formatUrlTime(new Date());
   return (
-    <React.Fragment>
-      <LinkWrapper>{prevDay ? <Link to={prevDay}>← {formatTime(parseUrlTime(prevDay))}</Link> : null}</LinkWrapper>
+    <div style={{
+      display: "grid",
+      gridTemplateRows: "auto",
+      gridTemplateColumns: "1fr 1fr 1fr",
+    }}>
+      <LinkWrapper first>{prevDay ? <Link to={prevDay}>{formatTime(parseUrlTime(prevDay))}</Link> : null}</LinkWrapper>
       <LinkWrapper>{today !== date ? <Link to={today}>Today</Link> : <span>Today</span>}</LinkWrapper>
-      <LinkWrapper>{nextDay ? <Link to={nextDay}>{formatTime(parseUrlTime(nextDay))} →</Link> : null}</LinkWrapper>
-    </React.Fragment>
+      <LinkWrapper last>{nextDay ? <Link to={nextDay}>{formatTime(parseUrlTime(nextDay))}</Link> : null}</LinkWrapper>
+    </div>
   );
 };
