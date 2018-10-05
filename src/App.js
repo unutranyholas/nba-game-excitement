@@ -1,5 +1,5 @@
 import React from "react";
-import {BrowserRouter as Router, Redirect, Route, /*NavLink, */Switch} from "react-router-dom";
+import {HashRouter as Router, Redirect, Route, /*NavLink, */Switch} from "react-router-dom";
 import {Title, SubTitle, Header} from "./components/Basic";
 import {Schedule} from "./components/Schedule";
 // import logos from "./data/logos";
