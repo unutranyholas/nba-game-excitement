@@ -28,6 +28,7 @@ export class Schedule extends React.PureComponent {
         <div style={{
           display: "grid",
           gridTemplateColumns: "2fr 1fr",
+          gridGap: ds.rem(ds.space),
           alignItems: "center",
           marginBottom: ds.rem(ds.space),
         }}>

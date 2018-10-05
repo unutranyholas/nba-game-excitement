@@ -3,7 +3,7 @@ import React from "react";
 import logos from "../data/logos";
 import {calculateScore} from "../data/scores";
 import {getTeam} from "../data/teams";
-import {Logo, LogoPlaceholder, PreviewLayout, Score, TeamName, Time} from "./Basic";
+import {Logo, LogoPlaceholder, PreviewLayout, Score, TeamName, Time, LiveBadge} from "./Basic";
 
 export const formatTime = timeFormat("%H:%M");
 
@@ -31,7 +31,6 @@ export class GamePreview extends React.Component {
   async componentDidUpdate(prevProps) {
     if (prevProps.gameId !== this.props.gameId) {
       this.setState(initialState);
-      //FIX backend, not to fetch data from DATA.NBA if there aren't data in db.
       await this.fetchData(this.props.gameId);
     }
   }
@@ -42,7 +41,7 @@ export class GamePreview extends React.Component {
       return <GamePreviewLoader />;
     }
     const {gameData, gameExcitement} = game;
-    const {vTeam, hTeam, startTimeUTC} = gameData;
+    const {vTeam, hTeam, startTimeUTC, statusNum} = gameData;
     const hTeamData = getTeam(hTeam.triCode);
     const vTeamData = getTeam(vTeam.triCode);
     const score = calculateScore(gameExcitement);
@@ -73,6 +72,7 @@ export class GamePreview extends React.Component {
           >
             {gameExcitement ? score.toFixed(1) : "_._"}
           </Score>
+          {statusNum === 2 && <LiveBadge>Live</LiveBadge>}
         </div>
       </PreviewLayout>
     );

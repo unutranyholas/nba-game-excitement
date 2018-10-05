@@ -34,29 +34,46 @@ export const Time = styled.div`
   min-width: ${ds.rem(50)};
 `;
 
+export const LiveBadge = styled.div`
+  background-color: #ff3d00;
+  font-weight: 700;
+  color: white;
+  padding: 0 0 ${ds.rem(1)};
+  border-radius: ${ds.rem(3)};
+  font-size: ${ds.rem(12)};
+  text-align: center;
+  text-transform: uppercase;
+  letter-spacing: ${ds.rem(3)};
+`;
+
 export const LinkWrapper = styled.div`
   font-size: ${ds.rem(16)};
   font-weight: 400;
   font-feature-settings: "tnum";
-  box-shadow: 0 0 1px rgba(0, 0, 0, 0.2);
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  border: 1px solid rgba(0, 0, 0, 0.05);
   text-align: center;
   line-height: 1;
   color: #CCC;
-  padding: ${ds.rem(ds.space / 2)} ${ds.rem(ds.space)};
+  white-space: nowrap;
   & a {
     text-decoration: none;
     color: #000;
+    padding: ${ds.rem(ds.space / 2)} ${ds.rem(ds.space)};
+    display: block;
+  };
+  & span {
+    padding: ${ds.rem(ds.space / 2)} ${ds.rem(ds.space)};
+    display: block;
   };
   ${({first}) => first ? css`
     border-top-left-radius: ${ds.rem(ds.space / 4)};
     border-bottom-left-radius: ${ds.rem(ds.space / 4)};
+    margin-right: -1px;
   ` : null}
   ${({last}) => last ? css`
     border-top-right-radius: ${ds.rem(ds.space / 4)};
     border-bottom-right-radius: ${ds.rem(ds.space / 4)};
+    margin-left: -1px;
   ` : null}  
 `;
 
