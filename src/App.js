@@ -23,11 +23,11 @@ export const App = () => (
         {/*<li><NavLink to="/charts/">Charts</NavLink></li>*/}
         {/*</ul>*/}
         <Switch>
-          <Route exact path="/" component={Home} />
-          <Route path="/info/" component={Info} />
-          <Route path="/charts/" component={Charts} />
-          <Route exact path="/games/" component={Schedule} />
-          <Route path="/games/:date" component={Schedule} />
+          <Route exact path={`${process.env.PUBLIC_URL}/`} component={Home} />
+          <Route path={`${process.env.PUBLIC_URL}/info/`} component={Info} />
+          <Route path={`${process.env.PUBLIC_URL}/charts/`} component={Charts} />
+          <Route exact path={`${process.env.PUBLIC_URL}/games/`} component={Schedule} />
+          <Route path={`${process.env.PUBLIC_URL}/games/:date`} component={Schedule} />
         </Switch>
       </div>
     </Router>
