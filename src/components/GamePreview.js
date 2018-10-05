@@ -7,8 +7,8 @@ import {Logo, LogoPlaceholder, PreviewLayout, Score, TeamName, Time, LiveBadge} 
 
 export const formatTime = timeFormat("%H:%M");
 
-// const serverUrl = "http://localhost:5000";
-const serverUrl = "https://nba-game-excitement.herokuapp.com";
+const serverUrl = "http://localhost:5000";
+// const serverUrl = "https://nba-game-excitement.herokuapp.com";
 
 const initialState = {
   loaded: false,
@@ -19,9 +19,24 @@ export class GamePreview extends React.Component {
   state = initialState;
 
   fetchData = async (gameId) => {
-    const game = await fetch(`${serverUrl}/games/${gameId}`);
+    const game = await fetch(`${serverUrl}/games/${gameId}/update`);
     const gameJson = await game.json();
     this.setState({game: gameJson, loaded: true});
+    if (gameJson.calcTriggered) {
+      await this.fetchUpdatedData(this.props.gameId);
+    }
+  };
+
+  fetchUpdatedData = async (gameId) => {
+    const game = await fetch(`${serverUrl}/games/${gameId}/load`);
+    const gameJson = await game.json();
+    if (gameJson.gameExcitement === null || gameJson.gameData.statusNum !== 3) {
+      setTimeout(async () => {
+        await this.fetchUpdatedData(gameId);
+      }, 2000);
+    } else {
+      this.setState({game: {...gameJson, calcTriggered: false}});
+    }
   };
 
   async componentDidMount() {
@@ -40,7 +55,7 @@ export class GamePreview extends React.Component {
     if (!loaded) {
       return <GamePreviewLoader />;
     }
-    const {gameData, gameExcitement} = game;
+    const {gameData, gameExcitement, calcTriggered} = game;
     const {vTeam, hTeam, startTimeUTC, statusNum} = gameData;
     const hTeamData = getTeam(hTeam.triCode);
     const vTeamData = getTeam(vTeam.triCode);
@@ -69,6 +84,7 @@ export class GamePreview extends React.Component {
           <Score
             value={gameExcitement ? score : null}
             title={tooltip}
+            animated={calcTriggered}
           >
             {gameExcitement ? score.toFixed(1) : "_._"}
           </Score>

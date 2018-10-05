@@ -1,5 +1,5 @@
 import React from "react";
-import styled, {css} from "styled-components";
+import styled, {css, keyframes} from "styled-components";
 import logos from "../data/logos";
 import {colorScale, ds} from "../designSystem";
 
@@ -39,6 +39,7 @@ export const LiveBadge = styled.div`
   font-weight: 700;
   color: white;
   padding: 0 0 ${ds.rem(1)};
+  margin-top: ${ds.rem(ds.space / 4)};
   border-radius: ${ds.rem(3)};
   font-size: ${ds.rem(12)};
   text-align: center;
@@ -93,6 +94,18 @@ export const TeamName = styled.div`
   font-size: ${ds.rem(18)};
 `;
 
+const loading = keyframes`
+  0% {
+    opacity: 0.2;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0.2;
+  }
+`;
+
 export const Score = styled.div`
   font-size: ${ds.rem(36)};
   font-weight: 700;
@@ -100,6 +113,12 @@ export const Score = styled.div`
   ${({value}) => css`
     color: ${value ? colorScale(value) : "#CCC"};
   `}
+  ${({animated}) => animated
+  ? css`
+        animation: ${loading} 0.8s ease-in-out infinite;
+      `
+  : null
+  }
 `;
 
 export const LogoPlaceholder = styled.div`
