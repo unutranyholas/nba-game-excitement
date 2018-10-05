@@ -10,7 +10,7 @@ const Home = () => <Redirect to={`/games/`} />;
 
 export const App = () => (
   <div>
-    <Router basename={process.env.PUBLIC_URL}>
+    <Router basename={"/"}>
       <div>
         {/*<img src={logos["NBA_logo"]} height="40" />*/}
         <Header>
