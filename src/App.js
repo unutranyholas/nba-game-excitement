@@ -6,11 +6,11 @@ import {Schedule} from "./components/Schedule";
 
 const Info = () => <h2>Info</h2>;
 const Charts = () => <h2>Charts</h2>;
-const Home = () => <Redirect to={`${process.env.PUBLIC_URL}/games/`} />;
+const Home = () => <Redirect to={`/games/`} />;
 
 export const App = () => (
   <div>
-    <Router>
+    <Router basename={process.env.PUBLIC_URL}>
       <div>
         {/*<img src={logos["NBA_logo"]} height="40" />*/}
         <Header>
@@ -23,11 +23,11 @@ export const App = () => (
         {/*<li><NavLink to="/charts/">Charts</NavLink></li>*/}
         {/*</ul>*/}
         <Switch>
-          <Route exact path={`${process.env.PUBLIC_URL}/`} component={Home} />
-          <Route path={`${process.env.PUBLIC_URL}/info/`} component={Info} />
-          <Route path={`${process.env.PUBLIC_URL}/charts/`} component={Charts} />
-          <Route exact path={`${process.env.PUBLIC_URL}/games/`} component={Schedule} />
-          <Route path={`${process.env.PUBLIC_URL}/games/:date`} component={Schedule} />
+          <Route exact path={`/`} component={Home} />
+          <Route path={`/info/`} component={Info} />
+          <Route path={`/charts/`} component={Charts} />
+          <Route exact path={`/games/`} component={Schedule} />
+          <Route path={`/games/:date`} component={Schedule} />
         </Switch>
       </div>
     </Router>

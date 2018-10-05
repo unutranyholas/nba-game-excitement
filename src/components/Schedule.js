@@ -32,7 +32,7 @@ export class Schedule extends React.PureComponent {
           marginBottom: ds.rem(ds.space),
         }}>
           <div style={{marginLeft: ds.rem(ds.space)}}>
-            <SeasonStage>{getSeasonStageName(match.params.date)}</SeasonStage>
+            <SeasonStage>{getSeasonStageName(formatUrlTime(date))}</SeasonStage>
             <DateHeader>{formatTime(date)}</DateHeader>
           </div>
           <Nav date={formatUrlTime(date)} />
