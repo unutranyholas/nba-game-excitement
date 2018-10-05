@@ -6,7 +6,7 @@ import {Schedule} from "./components/Schedule";
 
 const Info = () => <h2>Info</h2>;
 const Charts = () => <h2>Charts</h2>;
-const Home = () => <Redirect to="/games/" />;
+const Home = () => <Redirect to={`${process.env.PUBLIC_URL}/games/`} />;
 
 export const App = () => (
   <div>
