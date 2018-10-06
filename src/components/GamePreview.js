@@ -33,7 +33,7 @@ export class GamePreview extends React.Component {
     if (gameJson.gameExcitement === null || gameJson.gameData.statusNum !== 3) {
       setTimeout(async () => {
         await this.fetchUpdatedData(gameId);
-      }, 2000);
+      }, 20000);
     } else {
       this.setState({game: {...gameJson, calcTriggered: false}});
     }
