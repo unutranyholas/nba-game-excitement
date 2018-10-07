@@ -6,7 +6,7 @@ import thunk from "redux-thunk";
 import {App} from "./App";
 import "./index.css";
 
-import {rootReducer} from "./reducers/index";
+import {rootReducer} from "./reducers";
 import registerServiceWorker from "./registerServiceWorker";
 
 const middlewares = [thunk];

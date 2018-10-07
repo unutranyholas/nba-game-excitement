@@ -4,9 +4,8 @@ import {connect} from "react-redux";
 import {fetchGames} from "../actions";
 import {getGameIds} from "../data/games";
 import {getSeasonStageName} from "../data/games.js";
-import {SeasonStage, DateHeader, ScheduleContainer, NavContainer, GamesContainer, DateHeaderContainer} from "./Basic";
+import {DateHeader, DateHeaderContainer, GamesContainer, NavContainer, ScheduleContainer, SeasonStage} from "./Basic";
 import {GamePreview} from "./GamePreview";
-import {LoadButton} from "./LoadButton";
 import {Nav} from "./Nav";
 
 const inputDate = "%Y%m%d";
