@@ -1,11 +1,11 @@
 import {timeFormat, timeParse} from "d3-time-format";
 import React from "react";
 import {connect} from "react-redux";
-import {fetchGames} from "../actions";
+import {fetchGames, initCalculation} from "../actions";
 import {getGameIds} from "../data/games";
 import {getSeasonStageName} from "../data/games.js";
 import {DateHeader, DateHeaderContainer, GamesContainer, NavContainer, ScheduleContainer, SeasonStage} from "./Basic";
-import {GamePreview} from "./GamePreview";
+import {GamePreview, GamePreviewLoader} from "./GamePreview";
 import {Nav} from "./Nav";
 
 const inputDate = "%Y%m%d";
@@ -15,21 +15,41 @@ export const formatUrlTime = timeFormat(inputDate);
 const formatTime = timeFormat(outputDate);
 
 class ScheduleComponent extends React.PureComponent {
+  fetchGames = () => {
+    this.props.fetchGames({date: this.props.match.params.date});
+  };
+
+  initCalculation = (gameId) => {
+    this.props.initCalculation({date: this.props.match.params.date, gameId});
+  };
+
   componentDidMount() {
-    const {loaded, match, fetchGames} = this.props;
-    if (!loaded.some(date => date === match.params.date)) {
-      fetchGames({date: match.params.date});
+    const {loadedDates, match} = this.props;
+    if (!loadedDates.some(date => date === match.params.date)) {
+      this.fetchGames();
     }
   }
 
   componentDidUpdate(prevProps) {
-    if (prevProps.match.params.date !== this.props.match.params.date) {
-      this.props.fetchGames({date: this.props.match.params.date});
+    const {match, gamesToUpdate, liveGames} = this.props;
+    if (prevProps.match.params.date !== match.params.date) {
+      this.fetchGames();
+    }
+    if (gamesToUpdate.length > 0) {
+      this.initCalculation(gamesToUpdate[0]);
+    }
+
+    if (gamesToUpdate.length === 0 && liveGames.length > 0) {
+      setTimeout(() => {
+        liveGames.forEach(liveGame => {
+          this.initCalculation(liveGame);
+        });
+      }, 120000);
     }
   }
 
   render() {
-    const {match, games} = this.props;
+    const {match, games, gamesToUpdate, liveGames} = this.props;
     const date = match.params.date
       ? parseUrlTime(match.params.date)
       : new Date();
@@ -48,8 +68,17 @@ class ScheduleComponent extends React.PureComponent {
         <GamesContainer>
           {
             gameIds.length > 0
-              ? gameIds.map((gameId) => games[gameId] ?
-              <GamePreview data={games[gameId]} key={gameId} gameId={gameId} /> : null)
+              ? gameIds.map(
+              (gameId) => games[gameId]
+                ? <GamePreview
+                  data={games[gameId]}
+                  key={gameId}
+                  gameId={gameId}
+                  needUpdate={gamesToUpdate.some(gameToUpdate => gameToUpdate === gameId)}
+                  live={liveGames.some(liveGame => liveGame === gameId)}
+                />
+                : <GamePreviewLoader key={gameId} />,
+              )
               : (<div>No games on this day</div>)
           }
         </GamesContainer>
@@ -58,4 +87,7 @@ class ScheduleComponent extends React.PureComponent {
   }
 }
 
-export const Schedule = connect(({games, loaded}) => ({games, loaded}), {fetchGames})(ScheduleComponent);
+export const Schedule = connect(
+  ({games, loadedDates, gamesToUpdate, liveGames}) => ({games, loadedDates, gamesToUpdate, liveGames}),
+  {fetchGames, initCalculation},
+)(ScheduleComponent);

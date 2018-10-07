@@ -9,13 +9,14 @@ export const formatTime = timeFormat("%H:%M");
 
 export class GamePreview extends React.Component {
   render() {
-    const {data} = this.props;
-    const {gameData, gameExcitement, calcTriggered} = data;
-    const {vTeam, hTeam, startTimeUTC, statusNum} = gameData;
+    const {data, needUpdate, live} = this.props;
+    const {gameData, gameExcitement} = data;
+    const {vTeam, hTeam, startTimeUTC} = gameData;
     const hTeamData = getTeam(hTeam.triCode);
     const vTeamData = getTeam(vTeam.triCode);
     const score = calculateScore(gameExcitement);
     const time = new Date(startTimeUTC);
+
     const tooltip = gameExcitement
       ? `GameExcitement is ${(gameExcitement / 1000).toFixed(3)}, it's higher than ${score * 10}% games in 2014—2018`
       : "";
@@ -39,11 +40,11 @@ export class GamePreview extends React.Component {
           <Score
             value={gameExcitement ? score : null}
             title={tooltip}
-            animated={calcTriggered}
+            animated={needUpdate}
           >
             {gameExcitement ? score.toFixed(1) : "_._"}
           </Score>
-          {statusNum === 2 && <LiveBadge>Live</LiveBadge>}
+          {live && <LiveBadge>Live</LiveBadge>}
         </ScoreContainer>
       </PreviewLayout>
     );

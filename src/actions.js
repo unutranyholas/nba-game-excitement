@@ -10,20 +10,34 @@ export const fetchGames = (payload) => {
   };
 };
 
+export const initCalculation = (payload) => {
+  return async (dispatch) => {
+    try {
+      const game = await updateGame(payload.date, payload.gameId);
+      console.log(game);
+      dispatch(saveUpdatedGame({game, date: payload.date}));
+    } catch (ex) {
+      console.log(ex);
+      // dispatch(showError(ex));
+    }
+  };
+};
+
 export const saveGames = (payload) => ({
   type: "SAVE_GAMES",
-  date: payload.date,
-  games: payload.games.reduce(
-    (acc, {gameId, ...rest}) => ({...acc, [gameId]: rest}),
-    {},
-  ),
+  ...payload,
 });
 
-const serverUrl = "http://localhost:5000";
-// const serverUrl = "https://nba-game-excitement.herokuapp.com";
+export const saveUpdatedGame = (payload) => ({
+  type: "UPDATE_GAME",
+  ...payload,
+});
 
-const fetchGameById = async (gameId) => {
-  const response = await fetch(`${serverUrl}/games/${gameId}/load`);
+// const serverUrl = "http://localhost:5000";
+const serverUrl = "https://nba-game-excitement.herokuapp.com";
+
+const updateGame = async (date, gameId) => {
+  const response = await fetch(`${serverUrl}/calc/${date}/${gameId}`);
   return response.json();
 };
 
