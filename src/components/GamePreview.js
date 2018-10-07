@@ -7,8 +7,8 @@ import {Logo, LogoPlaceholder, PreviewLayout, Score, TeamName, Time, LiveBadge, 
 
 export const formatTime = timeFormat("%H:%M");
 
-// const serverUrl = "http://localhost:5000";
-const serverUrl = "https://nba-game-excitement.herokuapp.com";
+const serverUrl = "http://localhost:5000";
+// const serverUrl = "https://nba-game-excitement.herokuapp.com";
 
 const initialState = {
   loaded: false,

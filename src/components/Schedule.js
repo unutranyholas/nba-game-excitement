@@ -4,6 +4,7 @@ import {getGameIds} from "../data/games";
 import {getSeasonStageName} from "../data/games.js";
 import {SeasonStage, DateHeader, ScheduleContainer, NavContainer, GamesContainer, DateHeaderContainer} from "./Basic";
 import {GamePreview} from "./GamePreview";
+import {LoadButton} from "./LoadButton";
 import {Nav} from "./Nav";
 
 const inputDate = "%Y%m%d";
@@ -32,6 +33,7 @@ export class Schedule extends React.PureComponent {
           <Nav date={formatUrlTime(date)} />
         </NavContainer>
         <GamesContainer>
+          <LoadButton date={match.params.date} />
           {
             gameIds.length > 0
               ? gameIds.map((gameId) => <GamePreview key={gameId} gameId={gameId} />)
