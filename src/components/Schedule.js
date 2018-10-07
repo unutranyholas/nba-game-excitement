@@ -36,6 +36,7 @@ class ScheduleComponent extends React.PureComponent {
     if (prevProps.date !== date) {
       this.fetchGames();
     }
+
     if (gamesToUpdate.length > 0) {
       this.initCalculation(gamesToUpdate[0]);
     }

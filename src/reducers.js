@@ -34,13 +34,13 @@ export const gamesToUpdate = (state = [], action) => {
       return [
         ...state, ...action.games
           .filter(({gameData}) => {
-            return gameData.statusNum === 1 && new Date() > new Date(gameData.startTimeUTC);
+            return gameData.statusNum === 1 && new Date() - new Date(gameData.startTimeUTC) > 1000 * 60 * 20;
           })
           .map(({gameId}) => gameId),
       ];
     case "UPDATE_GAME":
       const {gameId, gameData: {statusNum}} = action.game;
-      if (statusNum !== 1) {
+      if (statusNum > 1) {
         return state.filter(gameToUpdateId => gameToUpdateId !== gameId);
       }
       return state;
@@ -61,7 +61,7 @@ export const liveGames = (state = [], action) => {
       ];
     case "UPDATE_GAME":
       const {gameId, gameData: {statusNum}} = action.game;
-      if (statusNum !== 2) {
+      if (statusNum > 2) {
         return state.filter(liveGame => liveGame !== gameId);
       }
       return state;
