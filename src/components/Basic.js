@@ -7,12 +7,28 @@ export const ScheduleContainer = styled.div`
   margin: 0 auto;
 `;
 
+export const NavButtons = styled.div`
+  display: grid;
+  grid-template-rows: auto;
+  grid-template-columns: 1fr 1fr 1fr;
+  @media (max-width: 450px) {
+    grid-area: 1 / 1 / 2 / 2;
+  }
+`;
+
 export const NavContainer = styled.div`
   display: grid;
   grid-template-columns: 2fr 1fr;
+  grid-template-rows: auto;
   grid-gap: ${ds.rem(ds.space)};
   align-items: center;
   margin-bottom: ${ds.rem(ds.space)};
+  margin-top: ${ds.rem(ds.space)};
+  @media (max-width: 450px) {
+    grid-template-columns: auto;
+    grid-template-rows: auto auto;
+    margin-top: 0;
+  }
 `;
 
 export const GamesContainer = styled.div`
@@ -24,7 +40,6 @@ export const GamesContainer = styled.div`
 export const Header = styled.div`
   padding: ${ds.rem(ds.space * 2)} 0;
   background: linear-gradient(-150deg, #597AC8, #B45ABF, #FF3D00);
-  margin-bottom: ${ds.rem(ds.space)};
 `;
 
 export const Title = styled.div`
