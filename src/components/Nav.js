@@ -3,16 +3,14 @@ import React from "react";
 import {Link} from "react-router-dom";
 import {gamesCount, getPrevNextDays} from "../data/games";
 import {LinkWrapper} from "./Basic";
-import {formatUrlTime} from "./Schedule";
 
 const inputDate = "%Y%m%d";
 const outputDate = "%b %d";
 const parseUrlTime = timeParse(inputDate);
 const formatTime = timeFormat(outputDate);
 
-export const Nav = ({date}) => {
+export const Nav = ({date, today}) => {
   const {nextDay, prevDay} = getPrevNextDays({date, gamesCount});
-  const today = formatUrlTime(new Date());
   return (
     <div style={{
       display: "grid",

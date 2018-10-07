@@ -13,26 +13,27 @@ const outputDate = "%b %d, %Y";
 const parseUrlTime = timeParse(inputDate);
 export const formatUrlTime = timeFormat(inputDate);
 const formatTime = timeFormat(outputDate);
+const today = formatUrlTime(new Date());
 
 class ScheduleComponent extends React.PureComponent {
   fetchGames = () => {
-    this.props.fetchGames({date: this.props.match.params.date});
+    this.props.fetchGames({date: this.props.date});
   };
 
   initCalculation = (gameId) => {
-    this.props.initCalculation({date: this.props.match.params.date, gameId});
+    this.props.initCalculation({date: this.props.date, gameId});
   };
 
   componentDidMount() {
-    const {loadedDates, match} = this.props;
-    if (!loadedDates.some(date => date === match.params.date)) {
+    const {loadedDates, date} = this.props;
+    if (!loadedDates.some(loadedDate => loadedDate === date)) {
       this.fetchGames();
     }
   }
 
   componentDidUpdate(prevProps) {
-    const {match, gamesToUpdate, liveGames} = this.props;
-    if (prevProps.match.params.date !== match.params.date) {
+    const {date, gamesToUpdate, liveGames} = this.props;
+    if (prevProps.date !== date) {
       this.fetchGames();
     }
     if (gamesToUpdate.length > 0) {
@@ -49,21 +50,18 @@ class ScheduleComponent extends React.PureComponent {
   }
 
   render() {
-    const {match, games, gamesToUpdate, liveGames} = this.props;
-    const date = match.params.date
-      ? parseUrlTime(match.params.date)
-      : new Date();
-
-    const gameIds = getGameIds(formatUrlTime(date));
+    const {games, gamesToUpdate, liveGames, date} = this.props;
+    const parsedDate = parseUrlTime(date);
+    const gameIds = getGameIds(date);
 
     return (
       <ScheduleContainer>
         <NavContainer>
           <DateHeaderContainer>
-            <SeasonStage>{getSeasonStageName(formatUrlTime(date))}</SeasonStage>
-            <DateHeader>{formatTime(date)}</DateHeader>
+            <SeasonStage>{getSeasonStageName(date)}</SeasonStage>
+            <DateHeader>{formatTime(parsedDate)}</DateHeader>
           </DateHeaderContainer>
-          <Nav date={formatUrlTime(date)} />
+          <Nav date={date} today={today} />
         </NavContainer>
         <GamesContainer>
           {
@@ -88,6 +86,12 @@ class ScheduleComponent extends React.PureComponent {
 }
 
 export const Schedule = connect(
-  ({games, loadedDates, gamesToUpdate, liveGames}) => ({games, loadedDates, gamesToUpdate, liveGames}),
+  ({games, loadedDates, gamesToUpdate, liveGames}, ownProps) => ({
+    games,
+    loadedDates,
+    gamesToUpdate,
+    liveGames,
+    date: ownProps.match.params.date || today,
+  }),
   {fetchGames, initCalculation},
 )(ScheduleComponent);
