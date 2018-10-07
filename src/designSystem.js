@@ -3,8 +3,10 @@ import {interpolateCubehelix} from "d3-interpolate";
 
 export const ds = {
   logoSize: 36,
-  rem: (x) => `${x / 16}rem`,
+  containerWidth: 1000,
+  cardWidth: 300,
   space: 16,
+  rem: (x) => `${x / 16}rem`,
 };
 
 export const colorScale = scaleLinear()

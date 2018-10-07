@@ -3,7 +3,7 @@ import React from "react";
 import logos from "../data/logos";
 import {calculateScore} from "../data/scores";
 import {getTeam} from "../data/teams";
-import {Logo, LogoPlaceholder, PreviewLayout, Score, TeamName, Time, LiveBadge} from "./Basic";
+import {Logo, LogoPlaceholder, PreviewLayout, Score, TeamName, Time, LiveBadge, ScoreContainer} from "./Basic";
 
 export const formatTime = timeFormat("%H:%M");
 
@@ -69,18 +69,18 @@ export class GamePreview extends React.Component {
         <Time>{formatTime(time)}</Time>
         <div>
           {logos[`${vTeam.triCode}_logo`]
-            ? <Logo triCode={vTeam.triCode} />
+            ? <Logo alt={vTeam.triCode} src={logos[`${vTeam.triCode}_logo`]} />
             : <LogoPlaceholder />}
         </div>
         <TeamName>{vTeamData ? vTeamData.nickname : vTeam.triCode}</TeamName>
         <div />
         <div>
           {logos[`${hTeam.triCode}_logo`]
-            ? <Logo triCode={hTeam.triCode} />
+            ? <Logo alt={hTeam.triCode} src={logos[`${hTeam.triCode}_logo`]} />
             : <LogoPlaceholder />}
         </div>
         <TeamName>{hTeamData ? hTeamData.nickname : hTeam.triCode}</TeamName>
-        <div style={{gridArea: "1 / 4 / 3 / 5", alignSelf: "flex-start"}}>
+        <ScoreContainer>
           <Score
             value={gameExcitement ? score : null}
             title={tooltip}
@@ -89,7 +89,7 @@ export class GamePreview extends React.Component {
             {gameExcitement ? score.toFixed(1) : "_._"}
           </Score>
           {statusNum === 2 && <LiveBadge>Live</LiveBadge>}
-        </div>
+        </ScoreContainer>
       </PreviewLayout>
     );
   }
@@ -108,9 +108,9 @@ export const GamePreviewLoader = () => {
         <LogoPlaceholder />
       </div>
       <TeamName>|||||||||||</TeamName>
-      <div style={{gridArea: "1 / 4 / 3 / 5", alignSelf: "flex-start"}}>
+      <ScoreContainer>
         <Score>_._</Score>
-      </div>
+      </ScoreContainer>
     </PreviewLayout>
   );
 };

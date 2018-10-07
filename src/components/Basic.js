@@ -1,11 +1,30 @@
 import React from "react";
 import styled, {css, keyframes} from "styled-components";
-import logos from "../data/logos";
 import {colorScale, ds} from "../designSystem";
+
+export const ScheduleContainer = styled.div`
+  padding: ${ds.rem(ds.space)};
+  max-width: ${ds.rem(ds.containerWidth)};
+  margin: 0 auto;
+`;
+
+export const NavContainer = styled.div`
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  grid-gap: ${ds.rem(ds.space)};
+  align-items: center;
+  margin-bottom: ${ds.rem(ds.space)};
+`;
+
+export const GamesContainer = styled.div`
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(${ds.rem(ds.cardWidth)}, 1fr));
+  grid-gap: ${ds.rem(ds.space)};
+`;
 
 export const Header = styled.div`
   padding: ${ds.rem(ds.space * 2)} 0;
-  background: linear-gradient(-150deg, #597ac8, #B45ABF, #ff3d00);
+  background: linear-gradient(-150deg, #597AC8, #B45ABF, #FF3D00);
   margin-bottom: ${ds.rem(ds.space)};
 `;
 
@@ -35,7 +54,7 @@ export const Time = styled.div`
 `;
 
 export const LiveBadge = styled.div`
-  background-color: #ff3d00;
+  background-color: #FF3D00;
   font-weight: 700;
   color: white;
   padding: 0 0 ${ds.rem(1)};
@@ -54,11 +73,11 @@ export const LinkWrapper = styled.div`
   border: 1px solid rgba(0, 0, 0, 0.05);
   text-align: center;
   line-height: 1;
-  color: #CCC;
+  color: #CCCCCC;
   white-space: nowrap;
   & a {
     text-decoration: none;
-    color: #000;
+    color: #000000;
     padding: ${ds.rem(ds.space / 2)} ${ds.rem(ds.space)};
     display: block;
   };
@@ -143,9 +162,17 @@ export const DateHeader = styled.div`
   padding: 0;
 `;
 
-export const Logo = ({triCode}) => (
-  <img
-    style={{display: "block", width: ds.rem(ds.logoSize), height: ds.rem(ds.logoSize)}}
-    alt={triCode}
-    src={logos[`${triCode}_logo`]}
-  />);
+export const Logo = styled.img`
+  display: block;
+  width: ${ds.rem(ds.logoSize)};
+  height: ${ds.rem(ds.logoSize)};
+`;
+
+export const ScoreContainer = styled.div`
+  grid-area: 1 / 4 / 3 / 5;
+  align-self: flex-start;
+`;
+
+export const DateHeaderContainer = styled.div`
+  margin-left: ${ds.rem(ds.space)};
+`;
