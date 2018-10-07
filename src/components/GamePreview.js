@@ -7,55 +7,10 @@ import {Logo, LogoPlaceholder, PreviewLayout, Score, TeamName, Time, LiveBadge, 
 
 export const formatTime = timeFormat("%H:%M");
 
-const serverUrl = "http://localhost:5000";
-// const serverUrl = "https://nba-game-excitement.herokuapp.com";
-
-const initialState = {
-  loaded: false,
-  game: {},
-};
-
 export class GamePreview extends React.Component {
-  state = initialState;
-
-  fetchData = async (gameId) => {
-    const game = await fetch(`${serverUrl}/games/${gameId}/update`);
-    const gameJson = await game.json();
-    this.setState({game: gameJson, loaded: true});
-    if (gameJson.calcTriggered) {
-      await this.fetchUpdatedData(this.props.gameId);
-    }
-  };
-
-  fetchUpdatedData = async (gameId) => {
-    const game = await fetch(`${serverUrl}/games/${gameId}/load`);
-    const gameJson = await game.json();
-    if (gameJson.gameExcitement === null || gameJson.gameData.statusNum !== 3) {
-      setTimeout(async () => {
-        await this.fetchUpdatedData(gameId);
-      }, 20000);
-    } else {
-      this.setState({game: {...gameJson, calcTriggered: false}});
-    }
-  };
-
-  async componentDidMount() {
-    await this.fetchData(this.props.gameId);
-  }
-
-  async componentDidUpdate(prevProps) {
-    if (prevProps.gameId !== this.props.gameId) {
-      this.setState(initialState);
-      await this.fetchData(this.props.gameId);
-    }
-  }
-
   render() {
-    const {game, loaded} = this.state;
-    if (!loaded) {
-      return <GamePreviewLoader />;
-    }
-    const {gameData, gameExcitement, calcTriggered} = game;
+    const {data} = this.props;
+    const {gameData, gameExcitement, calcTriggered} = data;
     const {vTeam, hTeam, startTimeUTC, statusNum} = gameData;
     const hTeamData = getTeam(hTeam.triCode);
     const vTeamData = getTeam(vTeam.triCode);
