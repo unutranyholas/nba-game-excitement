@@ -32,8 +32,8 @@ export const saveUpdatedGame = (payload) => ({
   ...payload,
 });
 
-const serverUrl = "http://localhost:5000";
-// const serverUrl = "https://nba-game-excitement.herokuapp.com";
+// const serverUrl = "http://localhost:5000";
+const serverUrl = "https://nba-game-excitement.herokuapp.com";
 
 const fetchGameById = async (gameId) => {
   const response = await fetch(`${serverUrl}/games/${gameId}`);
