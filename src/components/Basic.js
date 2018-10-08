@@ -1,6 +1,18 @@
 import styled, {css, keyframes} from "styled-components";
 import {colorScale, ds} from "../designSystem";
 
+const loading = keyframes`
+  0% {
+    opacity: 0.2;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0.2;
+  }
+`;
+
 export const ScheduleContainer = styled.div`
   padding: ${ds.rem(ds.space)};
   max-width: ${ds.rem(ds.containerWidth)};
@@ -78,6 +90,7 @@ export const LiveBadge = styled.div`
   text-align: center;
   text-transform: uppercase;
   letter-spacing: ${ds.rem(3)};
+  animation: ${loading} 0.8s ease-in-out infinite;
 `;
 
 export const LinkWrapper = styled.div`
@@ -127,17 +140,6 @@ export const TeamName = styled.div`
   font-size: ${ds.rem(18)};
 `;
 
-const loading = keyframes`
-  0% {
-    opacity: 0.2;
-  }
-  50% {
-    opacity: 1;
-  }
-  100% {
-    opacity: 0.2;
-  }
-`;
 
 export const Score = styled.div`
   font-size: ${ds.rem(36)};
@@ -146,11 +148,6 @@ export const Score = styled.div`
   ${({value}) => css`
     color: ${value ? colorScale(value) : "#CCC"};
   `}
-  ${({animated}) => animated
-  ? css`
-        animation: ${loading} 0.8s ease-in-out infinite;
-      `
-  : null
   }
 `;
 

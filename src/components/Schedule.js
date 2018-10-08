@@ -1,7 +1,7 @@
 import {timeFormat, timeParse} from "d3-time-format";
 import React from "react";
 import {connect} from "react-redux";
-import {fetchGames, initCalculation} from "../actions";
+import {fetchGames, updateGame} from "../actions";
 import {getGameIds} from "../data/games";
 import {getSeasonStageName} from "../data/games.js";
 import {DateHeader, DateHeaderContainer, GamesContainer, NavContainer, ScheduleContainer, SeasonStage} from "./Basic";
@@ -16,42 +16,38 @@ const formatTime = timeFormat(outputDate);
 const today = formatUrlTime(new Date());
 
 class ScheduleComponent extends React.PureComponent {
-  fetchGames = () => {
-    this.props.fetchGames({date: this.props.date});
-  };
-
-  initCalculation = (gameId) => {
-    this.props.initCalculation({date: this.props.date, gameId});
-  };
+  updateTimeout = null;
 
   componentDidMount() {
-    const {loadedDates, date} = this.props;
+    const {loadedDates, date, fetchGames} = this.props;
     if (!loadedDates.some(loadedDate => loadedDate === date)) {
-      this.fetchGames();
+      fetchGames({date});
     }
   }
 
   componentDidUpdate(prevProps) {
-    const {date, gamesToUpdate, liveGames} = this.props;
-    if (prevProps.date !== date) {
-      this.fetchGames();
+    const {date, fetchGames, loadedDates, updateGame, gamesToUpdate} = this.props;
+    if (prevProps.date !== date && !loadedDates.some(loadedDate => loadedDate === date)) {
+      fetchGames({date});
     }
+
+    clearTimeout(this.updateTimeout);
 
     if (gamesToUpdate.length > 0) {
-      this.initCalculation(gamesToUpdate[0]);
-    }
-
-    if (gamesToUpdate.length === 0 && liveGames.length > 0) {
-      setTimeout(() => {
-        liveGames.forEach(liveGame => {
-          this.initCalculation(liveGame);
+      this.updateTimeout = setTimeout(() => {
+        gamesToUpdate.forEach(gameId => {
+          updateGame({gameId});
         });
-      }, 120000);
+      }, 60000);
     }
   }
 
+  componentWillUnmount() {
+    clearTimeout(this.updateTimeout);
+  }
+
   render() {
-    const {games, gamesToUpdate, liveGames, date} = this.props;
+    const {games, gamesToUpdate, date} = this.props;
     const parsedDate = parseUrlTime(date);
     const gameIds = getGameIds(date);
 
@@ -74,7 +70,6 @@ class ScheduleComponent extends React.PureComponent {
                   key={gameId}
                   gameId={gameId}
                   needUpdate={gamesToUpdate.some(gameToUpdate => gameToUpdate === gameId)}
-                  live={liveGames.some(liveGame => liveGame === gameId)}
                 />
                 : <GamePreviewLoader key={gameId} />,
               )
@@ -90,9 +85,9 @@ export const Schedule = connect(
   ({games, loadedDates, gamesToUpdate, liveGames}, ownProps) => ({
     games,
     loadedDates,
-    gamesToUpdate,
+    gamesToUpdate, //TODO: filter games only from current date
     liveGames,
     date: ownProps.match.params.date || today,
   }),
-  {fetchGames, initCalculation},
+  {fetchGames, updateGame},
 )(ScheduleComponent);

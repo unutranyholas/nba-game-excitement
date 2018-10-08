@@ -14,7 +14,7 @@ export const App = () => (
       <div>
         {/*<img src={logos["NBA_logo"]} height="40" />*/}
         <Header>
-          <Title>NBA Game Excitement Score</Title>
+          <Title>NBA Game Excitement Rating</Title>
           <SubTitle>Choose games worth to watch (without spoilers)</SubTitle>
         </Header>
         {/*<ul>*/}

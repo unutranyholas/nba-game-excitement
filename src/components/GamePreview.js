@@ -9,9 +9,9 @@ export const formatTime = timeFormat("%H:%M");
 
 export class GamePreview extends React.Component {
   render() {
-    const {data, needUpdate, live} = this.props;
+    const {data, needUpdate} = this.props;
     const {gameData, gameExcitement} = data;
-    const {vTeam, hTeam, startTimeUTC} = gameData;
+    const {vTeam, hTeam, startTimeUTC, statusNum} = gameData;
     const hTeamData = getTeam(hTeam.triCode);
     const vTeamData = getTeam(vTeam.triCode);
     const score = calculateScore(gameExcitement);
@@ -44,7 +44,7 @@ export class GamePreview extends React.Component {
           >
             {gameExcitement ? score.toFixed(1) : "_._"}
           </Score>
-          {live && <LiveBadge>Live</LiveBadge>}
+          {statusNum === 2 && <LiveBadge>Live</LiveBadge>}
         </ScoreContainer>
       </PreviewLayout>
     );

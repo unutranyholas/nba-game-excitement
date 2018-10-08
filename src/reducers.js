@@ -34,35 +34,14 @@ export const gamesToUpdate = (state = [], action) => {
       return [
         ...state, ...action.games
           .filter(({gameData}) => {
-            return gameData.statusNum === 1 && new Date() - new Date(gameData.startTimeUTC) > 1000 * 60 * 20;
+            return new Date() > new Date(gameData.startTimeUTC) && gameData.statusNum !== 3;
           })
           .map(({gameId}) => gameId),
       ];
     case "UPDATE_GAME":
       const {gameId, gameData: {statusNum}} = action.game;
-      if (statusNum > 1) {
+      if (statusNum === 3) {
         return state.filter(gameToUpdateId => gameToUpdateId !== gameId);
-      }
-      return state;
-    default:
-      return state;
-  }
-};
-
-export const liveGames = (state = [], action) => {
-  switch (action.type) {
-    case "SAVE_GAMES":
-      return [
-        ...state, ...action.games
-          .filter(({gameData}) => {
-            return gameData.statusNum === 2;
-          })
-          .map(({gameId}) => gameId),
-      ];
-    case "UPDATE_GAME":
-      const {gameId, gameData: {statusNum}} = action.game;
-      if (statusNum > 2) {
-        return state.filter(liveGame => liveGame !== gameId);
       }
       return state;
     default:
@@ -74,5 +53,4 @@ export const rootReducer = combineReducers({
   games,
   loadedDates,
   gamesToUpdate,
-  liveGames,
 });
