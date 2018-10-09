@@ -1,6 +1,6 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "short_name": "NBA Game Excitement Rating",
+  "name": "NBA Game Excitement Rating | Choose games worth to watch (without spoilers)",
   "icons": [
     {
       "src": "favicon.ico",
