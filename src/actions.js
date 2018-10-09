@@ -32,6 +32,11 @@ export const saveUpdatedGame = (payload) => ({
   ...payload,
 });
 
+export const startUpdating = (payload) => ({
+  type: "START_UPDATING",
+  ...payload,
+});
+
 // const serverUrl = "http://localhost:5000";
 const serverUrl = "https://nba-game-excitement.herokuapp.com";
 

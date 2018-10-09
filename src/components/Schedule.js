@@ -1,7 +1,7 @@
 import {timeFormat, timeParse} from "d3-time-format";
 import React from "react";
 import {connect} from "react-redux";
-import {fetchGames, updateGame} from "../actions";
+import {fetchGames, updateGame, startUpdating} from "../actions";
 import {getGameIds} from "../data/games";
 import {getSeasonStageName} from "../data/games.js";
 import {DateHeader, DateHeaderContainer, GamesContainer, NavContainer, ScheduleContainer, SeasonStage} from "./Basic";
@@ -16,34 +16,45 @@ const formatTime = timeFormat(outputDate);
 const today = formatUrlTime(new Date());
 
 class ScheduleComponent extends React.PureComponent {
-  updateTimeout = null;
+  updateInterval = null;
+
+  updateGames = () => {
+    const {games, gamesToUpdate, updateGame, startUpdating} = this.props;
+
+    const newGamesToUpdate = Object.entries(games)
+      .filter(([gameId, {gameData}]) => {
+        return new Date() > new Date(gameData.startTimeUTC) && gameData.statusNum === 1;
+      })
+      .map(([gameId]) => gameId);
+
+    if (newGamesToUpdate.length > 0) {
+      startUpdating({games: newGamesToUpdate});
+    }
+
+    if (gamesToUpdate.length > 0) {
+      gamesToUpdate.forEach(gameId => {
+        updateGame({gameId});
+      });
+    }
+  };
 
   componentDidMount() {
     const {loadedDates, date, fetchGames} = this.props;
     if (!loadedDates.some(loadedDate => loadedDate === date)) {
       fetchGames({date});
     }
+    this.updateInterval = setInterval(this.updateGames, 120000);
   }
 
   componentDidUpdate(prevProps) {
-    const {date, fetchGames, loadedDates, updateGame, gamesToUpdate} = this.props;
+    const {date, fetchGames, loadedDates} = this.props;
     if (prevProps.date !== date && !loadedDates.some(loadedDate => loadedDate === date)) {
       fetchGames({date});
-    }
-
-    clearTimeout(this.updateTimeout);
-
-    if (gamesToUpdate.length > 0) {
-      this.updateTimeout = setTimeout(() => {
-        gamesToUpdate.forEach(gameId => {
-          updateGame({gameId});
-        });
-      }, 60000);
     }
   }
 
   componentWillUnmount() {
-    clearTimeout(this.updateTimeout);
+    clearInterval(this.updateInterval);
   }
 
   render() {
@@ -89,5 +100,5 @@ export const Schedule = connect(
     liveGames,
     date: ownProps.match.params.date || today,
   }),
-  {fetchGames, updateGame},
+  {fetchGames, updateGame, startUpdating},
 )(ScheduleComponent);

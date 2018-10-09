@@ -44,6 +44,8 @@ export const gamesToUpdate = (state = [], action) => {
         return state.filter(gameToUpdateId => gameToUpdateId !== gameId);
       }
       return state;
+    case "START_UPDATING":
+      return [...new Set([...state, ...action.games])];
     default:
       return state;
   }
