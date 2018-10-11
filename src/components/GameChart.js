@@ -32,7 +32,7 @@ export const GameChart = ({data: {gameData, winProbsLog: {winProbsLog}}}) => {
   const hTeam = getTeam(gameData.hTeam.triCode);
   return (
     <svg
-      preserveAspectRatio="none"
+      // preserveAspectRatio="none"
       xmlns="http://www.w3.org/2000/svg"
       viewBox={`0 0 ${chartSize.width} ${chartSize.height}`}
       style={{
