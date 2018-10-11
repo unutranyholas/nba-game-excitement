@@ -4,11 +4,23 @@ import logos from "../data/logos";
 import {calculateScore} from "../data/scores";
 import {getTeam} from "../data/teams";
 import {Logo, LogoPlaceholder, PreviewLayout, Score, TeamName, Time, LiveBadge, ScoreContainer} from "./Basic";
+import {GameChart} from "./GameChart";
 
 export const formatTime = timeFormat("%H:%M");
 
 export class GamePreview extends React.Component {
+  state = {
+    spoiled: false,
+  };
+
+  toggleSpoiler = () => {
+    this.setState(({spoiled}) => ({
+      spoiled: !spoiled,
+    }));
+  };
+
   render() {
+    const {spoiled} = this.state;
     const {data, needUpdate} = this.props;
     const {gameData, gameExcitement} = data;
     const {vTeam, hTeam, startTimeUTC, statusNum} = gameData;
@@ -20,8 +32,11 @@ export class GamePreview extends React.Component {
     const tooltip = gameExcitement
       ? `GameExcitement is ${(gameExcitement / 1000).toFixed(3)}, it's higher than ${score * 10}% games in 2014—2018`
       : "";
-    return (
-      <PreviewLayout>
+    return spoiled
+      ? <div onClick={this.toggleSpoiler} style={{height: 97}}>
+        <GameChart data={data} />
+      </div>
+      : <PreviewLayout onClick={statusNum > 1 ? this.toggleSpoiler : null}>
         <Time>{formatTime(time)}</Time>
         <div>
           {logos[`${vTeam.triCode}_logo`]
@@ -46,8 +61,7 @@ export class GamePreview extends React.Component {
           </Score>
           {statusNum === 2 && <LiveBadge>Live</LiveBadge>}
         </ScoreContainer>
-      </PreviewLayout>
-    );
+      </PreviewLayout>;
   }
 }
 

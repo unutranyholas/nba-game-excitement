@@ -133,13 +133,16 @@ export const PreviewLayout = styled.div`
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
   padding: ${ds.rem(ds.space / 3 * 2)} ${ds.rem(ds.space)};
   border-radius: ${ds.rem(ds.space / 4)};
+  background-color: white;
 `;
 
 export const TeamName = styled.div`
   font-weight: 700;
   font-size: ${ds.rem(18)};
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 `;
-
 
 export const Score = styled.div`
   font-size: ${ds.rem(36)};

@@ -15,7 +15,7 @@ export const App = () => (
         {/*<img src={logos["NBA_logo"]} height="40" />*/}
         <Header>
           <Title>NBA Game Excitement Rating</Title>
-          <SubTitle>Choose games worth to watch (without spoilers)</SubTitle>
+          <SubTitle>Choose games worth watching (without spoilers)</SubTitle>
         </Header>
         {/*<ul>*/}
         {/*<li><NavLink to="/games/">Games</NavLink></li>*/}

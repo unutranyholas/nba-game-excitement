@@ -15,6 +15,7 @@ const teams = [
     "urlName": "hawks",
     "confName": "East",
     "divName": "Southeast",
+    "color": "#E03A3E",
   },
   {
     "isNBAFranchise": true,
@@ -28,6 +29,7 @@ const teams = [
     "urlName": "celtics",
     "confName": "East",
     "divName": "Atlantic",
+    "color": "#008248",
   },
   {
     "isNBAFranchise": false,
@@ -54,6 +56,7 @@ const teams = [
     "urlName": "nets",
     "confName": "East",
     "divName": "Atlantic",
+    "color": "#000000",
   },
   {
     "isNBAFranchise": true,
@@ -67,6 +70,7 @@ const teams = [
     "urlName": "hornets",
     "confName": "East",
     "divName": "Southeast",
+    "color": "#0D89A5",
   },
   {
     "isNBAFranchise": true,
@@ -80,6 +84,7 @@ const teams = [
     "urlName": "bulls",
     "confName": "East",
     "divName": "Central",
+    "color": "#CE1141",
   },
   {
     "isNBAFranchise": true,
@@ -93,6 +98,7 @@ const teams = [
     "urlName": "cavaliers",
     "confName": "East",
     "divName": "Central",
+    "color": "#6F263D",
   },
   {
     "isNBAFranchise": true,
@@ -106,6 +112,7 @@ const teams = [
     "urlName": "mavericks",
     "confName": "West",
     "divName": "Southwest",
+    "color": "#8E9090",
   },
   {
     "isNBAFranchise": true,
@@ -119,6 +126,7 @@ const teams = [
     "urlName": "nuggets",
     "confName": "West",
     "divName": "Northwest",
+    "color": "#FFC627",
   },
   {
     "isNBAFranchise": true,
@@ -132,6 +140,7 @@ const teams = [
     "urlName": "pistons",
     "confName": "East",
     "divName": "Central",
+    "color": "#DD0031",
   },
   {
     "isNBAFranchise": true,
@@ -145,6 +154,7 @@ const teams = [
     "urlName": "warriors",
     "confName": "West",
     "divName": "Pacific",
+    "color": "#0068B3",
   },
   {
     "isNBAFranchise": false,
@@ -184,6 +194,7 @@ const teams = [
     "urlName": "rockets",
     "confName": "West",
     "divName": "Southwest",
+    "color": "#C3002F",
   },
   {
     "isNBAFranchise": true,
@@ -197,6 +208,7 @@ const teams = [
     "urlName": "pacers",
     "confName": "East",
     "divName": "Central",
+    "color": "#FDBB30",
   },
   {
     "isNBAFranchise": true,
@@ -210,6 +222,7 @@ const teams = [
     "urlName": "clippers",
     "confName": "West",
     "divName": "Pacific",
+    "color": "#006BB5",
   },
   {
     "isNBAFranchise": true,
@@ -223,6 +236,7 @@ const teams = [
     "urlName": "lakers",
     "confName": "West",
     "divName": "Pacific",
+    "color": "#552583",
   },
   {
     "isNBAFranchise": false,
@@ -249,6 +263,7 @@ const teams = [
     "urlName": "grizzlies",
     "confName": "West",
     "divName": "Southwest",
+    "color": "#5D76A9",
   },
   {
     "isNBAFranchise": true,
@@ -262,6 +277,7 @@ const teams = [
     "urlName": "heat",
     "confName": "East",
     "divName": "Southeast",
+    "color": "#8B2332",
   },
   {
     "isNBAFranchise": true,
@@ -275,6 +291,7 @@ const teams = [
     "urlName": "bucks",
     "confName": "East",
     "divName": "Central",
+    "color": "#00471A",
   },
   {
     "isNBAFranchise": true,
@@ -288,6 +305,7 @@ const teams = [
     "urlName": "timberwolves",
     "confName": "West",
     "divName": "Northwest",
+    "color": "#0D2240",
   },
   {
     "isNBAFranchise": true,
@@ -301,6 +319,7 @@ const teams = [
     "urlName": "pelicans",
     "confName": "West",
     "divName": "Southwest",
+    "color": "#E31837",
   },
   {
     "isNBAFranchise": true,
@@ -314,6 +333,7 @@ const teams = [
     "urlName": "knicks",
     "confName": "East",
     "divName": "Atlantic",
+    "color": "#FF671B",
   },
   {
     "isNBAFranchise": true,
@@ -327,6 +347,7 @@ const teams = [
     "urlName": "thunder",
     "confName": "West",
     "divName": "Northwest",
+    "color": "#F42534",
   },
   {
     "isNBAFranchise": true,
@@ -340,6 +361,7 @@ const teams = [
     "urlName": "magic",
     "confName": "East",
     "divName": "Southeast",
+    "color": "#0055B8",
   },
   {
     "isNBAFranchise": true,
@@ -353,6 +375,7 @@ const teams = [
     "urlName": "sixers",
     "confName": "East",
     "divName": "Atlantic",
+    "color": "#006AB3",
   },
   {
     "isNBAFranchise": true,
@@ -366,6 +389,7 @@ const teams = [
     "urlName": "suns",
     "confName": "West",
     "divName": "Pacific",
+    "color": "#F9A01B",
   },
   {
     "isNBAFranchise": true,
@@ -379,6 +403,7 @@ const teams = [
     "urlName": "blazers",
     "confName": "West",
     "divName": "Northwest",
+    "color": "#000000",
   },
   {
     "isNBAFranchise": true,
@@ -392,6 +417,7 @@ const teams = [
     "urlName": "kings",
     "confName": "West",
     "divName": "Pacific",
+    "color": "#5B2B82",
   },
   {
     "isNBAFranchise": true,
@@ -405,6 +431,7 @@ const teams = [
     "urlName": "spurs",
     "confName": "West",
     "divName": "Southwest",
+    "color": "#000000",
   },
   {
     "isNBAFranchise": false,
@@ -496,6 +523,7 @@ const teams = [
     "urlName": "raptors",
     "confName": "East",
     "divName": "Atlantic",
+    "color": "#070B0C",
   },
   {
     "isNBAFranchise": false,
@@ -522,6 +550,7 @@ const teams = [
     "urlName": "jazz",
     "confName": "West",
     "divName": "Northwest",
+    "color": "#0D2240",
   },
   {
     "isNBAFranchise": true,
@@ -535,6 +564,7 @@ const teams = [
     "urlName": "wizards",
     "confName": "East",
     "divName": "Southeast",
+    "color": "#CF0A2C",
   },
   {
     "isNBAFranchise": false,
