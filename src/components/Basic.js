@@ -131,7 +131,7 @@ export const PreviewLayout = styled.div`
   align-items: center;
   grid-gap: 0 ${ds.rem(ds.space / 2)};
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-  padding: ${ds.rem(ds.space)};
+  padding: ${ds.rem(ds.space / 4 * 3)};
   border-radius: ${ds.rem(ds.space / 4)};
   background-color: white;
   height: ${ds.rem(ds.cardHeight)};
@@ -152,7 +152,6 @@ export const TeamName = styled.div`
 export const Score = styled.div`
   font-size: ${ds.rem(36)};
   font-weight: 700;
-  line-height: 1;
   font-feature-settings: "tnum", "zero";
   ${({value}) => css`
     color: ${value ? colorScale(value) : "#CCC"};
@@ -192,6 +191,7 @@ export const Logo = styled.img`
 export const ScoreContainer = styled.div`
   grid-area: 1 / 4 / 3 / 5;
   align-self: flex-start;
+  
 `;
 
 export const DateHeaderContainer = styled.div`

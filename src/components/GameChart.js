@@ -6,7 +6,7 @@ import {getTeam} from "../data/teams";
 import {ds} from "../designSystem";
 import {ChartContainer, ChartTeamName, ChartScore, QuarterLine, WinProbPath, FiftyPercentLine, ChartSvg} from "./Basic";
 
-const chartSize = {width: 300, height: 100, margin: ds.space / 2};
+const chartSize = {width: ds.cardWidth, height: ds.cardHeight, margin: ds.space / 2};
 const quarters = [0, 720, 1440, 2160, 2880, 3180, 3480, 3780, 4080, 4380];
 
 export const GameChart = ({data: {gameData, winProbsLog: {winProbsLog}}}) => {
@@ -61,7 +61,8 @@ export const GameChart = ({data: {gameData, winProbsLog: {winProbsLog}}}) => {
         <WinProbPath d={path} stroke={vTeamColor} clipPath="url(#top)" />
         <WinProbPath d={path} stroke={hTeamColor} clipPath="url(#bottom)" />
         <FiftyPercentLine x1={0} x2={chartSize.width} y1={chartSize.height / 2} y2={chartSize.height / 2} />
-        {quarters.map(quarter => <QuarterLine
+        {quarters.map((quarter, index) => <QuarterLine
+          key={index}
           x1={x(quarter)}
           x2={x(quarter)}
           y1={0}
