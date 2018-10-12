@@ -31,7 +31,7 @@ export class GamePreview extends React.Component {
     const time = new Date(startTimeUTC);
 
     const tooltip = gameExcitement
-      ? `GameExcitement is ${(gameExcitement / 1000).toFixed(3)}, it's higher than ${score * 10}% games in 2014—2018`
+      ? `Game excitement is ${(gameExcitement / 1000).toFixed(3)}, it's higher than ${score * 10}% games in 2014—2018`
       : "";
     return spoiled
       ? <div onClick={this.toggleSpoiler} style={{height: ds.rem(ds.cardHeight)}}>

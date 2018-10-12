@@ -135,6 +135,10 @@ export const PreviewLayout = styled.div`
   border-radius: ${ds.rem(ds.space / 4)};
   background-color: white;
   height: ${ds.rem(ds.cardHeight)};
+  transition: box-shadow 0.1s ease-out;
+  &:hover {
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+  }
 `;
 
 export const TeamName = styled.div`
@@ -201,6 +205,10 @@ export const ChartContainer = styled.div`
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
   border-radius: 4px;
   background-color: white;
+  transition: box-shadow 0.1s ease-out;
+  &:hover {
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+  }
 `;
 
 export const ChartTeamName = styled.div`
