@@ -5,6 +5,7 @@ export const ds = {
   logoSize: 36,
   containerWidth: 1000,
   cardWidth: 300,
+  cardHeight: 100,
   space: 16,
   rem: (x) => `${x / 16}rem`,
 };

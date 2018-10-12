@@ -76,7 +76,7 @@ export const Time = styled.div`
   color: rgba(0, 0, 0, 0.4);
   font-feature-settings: "tnum";
   font-size: ${ds.rem(14)};
-  min-width: ${ds.rem(50)};
+  min-width: ${ds.rem(40)};
 `;
 
 export const LiveBadge = styled.div`
@@ -127,13 +127,14 @@ export const LinkWrapper = styled.div`
 export const PreviewLayout = styled.div`
   display: grid;
   grid-template-columns: auto ${ds.rem(ds.logoSize)} 1fr auto;
-  grid-template-rows: auto auto;
+  grid-template-rows: 1fr 1fr;
   align-items: center;
-  grid-gap: ${ds.rem(ds.space / 4)};
+  grid-gap: 0 ${ds.rem(ds.space / 2)};
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-  padding: ${ds.rem(ds.space / 3 * 2)} ${ds.rem(ds.space)};
+  padding: ${ds.rem(ds.space)};
   border-radius: ${ds.rem(ds.space / 4)};
   background-color: white;
+  height: ${ds.rem(ds.cardHeight)};
 `;
 
 export const TeamName = styled.div`
@@ -147,6 +148,7 @@ export const TeamName = styled.div`
 export const Score = styled.div`
   font-size: ${ds.rem(36)};
   font-weight: 700;
+  line-height: 1;
   font-feature-settings: "tnum", "zero";
   ${({value}) => css`
     color: ${value ? colorScale(value) : "#CCC"};
@@ -155,10 +157,11 @@ export const Score = styled.div`
 `;
 
 export const LogoPlaceholder = styled.div`
-  width: ${ds.rem(ds.logoSize)};
-  height: ${ds.rem(ds.logoSize)};
+  width: ${ds.rem(ds.logoSize - ds.space / 2)};
+  height: ${ds.rem(ds.logoSize - ds.space / 2)};
   border-radius: ${ds.rem(ds.logoSize / 2)};
   box-shadow: 0px 0px 1px rgba(0, 0, 0, 0.2);
+  margin: ${ds.rem(ds.space / 4)};
 `;
 
 export const SeasonStage = styled.div`
@@ -189,4 +192,77 @@ export const ScoreContainer = styled.div`
 
 export const DateHeaderContainer = styled.div`
   margin-left: ${ds.rem(ds.space)};
+`;
+
+export const ChartContainer = styled.div`
+  position: relative;
+  width: 100%;
+  height: 100%;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  border-radius: 4px;
+  background-color: white;
+`;
+
+export const ChartTeamName = styled.div`
+  z-index: 5;
+  font-size: ${ds.rem(16)};
+  letter-spacing: ${ds.rem(2)};
+  font-weight: 600;
+  font-feature-settings: "ss03";
+  line-height: 1;
+  text-shadow: 1px 1px 0 white, -1px -1px 0 white, 1px -1px 0 white,
+    -1px 1px 0 white;
+  position: absolute;
+  left: ${ds.rem(ds.space / 3 * 2)};
+  ${({color, position}) => css`
+    color: ${color};
+    ${position}: ${ds.rem(ds.space / 3 * 2)};
+  `}
+`;
+
+export const ChartScore = styled.div`
+  z-index: 5;
+  font-size: ${ds.rem(16)};
+  font-weight: 600;
+  font-feature-settings: "tnum", "zero";
+  line-height: 1;
+  text-shadow: 1px 1px 0 white, -1px -1px 0 white, 1px -1px 0 white, -1px 1px 0 white;
+  position: absolute;
+  right: ${ds.rem(ds.space / 3 * 2)};
+  ${({color, position}) => css`
+    color: ${color};
+    ${position}: ${ds.rem(ds.space / 3 * 2)};
+  `}
+`;
+
+export const QuarterLine = styled.line`
+  strokeWidth: 1;
+  stroke: #00000022;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-dasharray: 1 4;
+  vector-effect: non-scaling-stroke;
+`;
+
+export const WinProbPath = styled.path`
+  fill: none;
+  stroke-width: 2; 
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  vector-effect: non-scaling-stroke;
+`;
+
+export const FiftyPercentLine = styled.line`
+  strokeWidth: 1;
+  stroke: #00000011;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  vector-effect: non-scaling-stroke;
+`;
+
+export const ChartSvg = styled.svg`
+  position: absolute;
+  display: block;
+  width: 100%;
+  height: ${ds.rem(ds.cardHeight)};
 `;

@@ -3,6 +3,7 @@ import React from "react";
 import logos from "../data/logos";
 import {calculateScore} from "../data/scores";
 import {getTeam} from "../data/teams";
+import {ds} from "../designSystem";
 import {Logo, LogoPlaceholder, PreviewLayout, Score, TeamName, Time, LiveBadge, ScoreContainer} from "./Basic";
 import {GameChart} from "./GameChart";
 
@@ -33,7 +34,7 @@ export class GamePreview extends React.Component {
       ? `GameExcitement is ${(gameExcitement / 1000).toFixed(3)}, it's higher than ${score * 10}% games in 2014—2018`
       : "";
     return spoiled
-      ? <div onClick={this.toggleSpoiler} style={{height: 97}}>
+      ? <div onClick={this.toggleSpoiler} style={{height: ds.rem(ds.cardHeight)}}>
         <GameChart data={data} />
       </div>
       : <PreviewLayout onClick={statusNum > 1 ? this.toggleSpoiler : null}>
@@ -57,7 +58,7 @@ export class GamePreview extends React.Component {
             title={tooltip}
             animated={needUpdate}
           >
-            {gameExcitement ? score.toFixed(1) : "_._"}
+            {gameExcitement ? score.toFixed(1) : "–.–"}
           </Score>
           {statusNum === 2 && <LiveBadge>Live</LiveBadge>}
         </ScoreContainer>
@@ -79,7 +80,7 @@ export const GamePreviewLoader = () => {
       </div>
       <TeamName>|||||||||||</TeamName>
       <ScoreContainer>
-        <Score>_._</Score>
+        <Score>–.–</Score>
       </ScoreContainer>
     </PreviewLayout>
   );
