@@ -37,7 +37,10 @@ export class GamePreview extends React.Component {
       ? <div onClick={this.toggleSpoiler} style={{height: ds.rem(ds.cardHeight)}}>
         <GameChart data={data} />
       </div>
-      : <PreviewLayout onClick={statusNum > 1 ? this.toggleSpoiler : null}>
+      : <PreviewLayout
+        onClick={statusNum > 1 ? this.toggleSpoiler : null}
+        spoilerable={statusNum > 1}
+      >
         <Time>{formatTime(time)}</Time>
         <div>
           {logos[`${vTeam.triCode}_logo`]
