@@ -277,3 +277,19 @@ export const ChartSvg = styled.svg`
   width: 100%;
   height: ${ds.rem(ds.cardHeight)};
 `;
+
+export const ContentContainer = styled.div`
+  max-width: ${ds.rem(ds.containerWidth)};
+  padding: ${ds.rem(ds.space * 2)};
+  padding-right: ${ds.rem(ds.containerWidth * 0.2)};
+  font-size: ${ds.rem(18)};
+  line-height: 1.44;
+  margin: 0 auto;
+  font-feature-settings: "liga";
+  & h2 {
+    margin: 0 0 ${ds.rem(ds.space / 2)};
+  }
+  & p {
+    margin: 0 0 ${ds.rem(ds.space / 2)};
+  }
+`;

@@ -1,10 +1,10 @@
 import React from "react";
-import {HashRouter as Router, Redirect, Route, /*NavLink, */Switch} from "react-router-dom";
-import {Title, SubTitle, Header} from "./components/Basic";
+import {HashRouter as Router, Redirect, Route, Switch} from "react-router-dom";
+import {Header, SubTitle, Title} from "./components/Basic";
+import {Info} from "./components/Info";
 import {Schedule} from "./components/Schedule";
 // import logos from "./data/logos";
 
-const Info = () => <h2>Info</h2>;
 const Charts = () => <h2>Charts</h2>;
 const Home = () => <Redirect to={`/games/`} />;
 
