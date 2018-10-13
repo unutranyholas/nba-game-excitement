@@ -62,7 +62,7 @@ export const GamesContainer = styled.div`
 
 export const Title = styled.div`
   font-weight: 700;
-  font-size: ${ds.rem(26)};
+  font-size: ${ds.rem(24)};
   color: white;
   line-height: 1;
   text-align: center;
@@ -137,6 +137,7 @@ export const LinkWrapper = styled.div`
 `;
 
 export const PreviewLayout = styled.div`
+  user-select: none;
   display: grid;
   grid-template-columns: auto ${ds.rem(ds.logoSize)} 1fr auto;
   grid-template-rows: 1fr 1fr;
@@ -216,6 +217,7 @@ export const DateHeaderContainer = styled.div`
 `;
 
 export const ChartContainer = styled.div`
+  user-select: none;
   position: relative;
   width: 100%;
   height: 100%;
@@ -340,7 +342,7 @@ export const NavItem = styled.div`
     color: white;
     text-decoration: none;
     display: block;
-    padding: ${ds.rem(ds.space / 4)} ${ds.rem(ds.space)};
+    padding: ${ds.rem(ds.space / 4)} ${ds.rem(ds.space / 4 * 3)} ${ds.rem(ds.space / 4 + 1)};
   }
 `;
 
