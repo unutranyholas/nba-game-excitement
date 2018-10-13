@@ -1,13 +1,15 @@
 import {timeFormat, timeParse} from "d3-time-format";
 import React from "react";
 import {connect} from "react-redux";
-import {fetchGames, updateGame, startUpdating} from "../actions";
+import {fetchGames, startUpdating, updateGame} from "../actions";
 import {getGameIds} from "../data/games";
 import {getSeasonStageName} from "../data/games.js";
 import {ds} from "../designSystem";
 import {DateHeader, DateHeaderContainer, GamesContainer, NavContainer, ScheduleContainer, SeasonStage} from "./Basic";
 import {GamePreview, GamePreviewLoader} from "./GamePreview";
+import {Header} from "./Header";
 import {Nav} from "./Nav";
+import {LinkToInfo} from "./RootNav";
 
 const inputDate = "%Y%m%d";
 const outputDate = "%b %d, %Y";
@@ -64,31 +66,35 @@ class ScheduleComponent extends React.PureComponent {
     const gameIds = getGameIds(date);
 
     return (
-      <ScheduleContainer>
-        <NavContainer>
-          <DateHeaderContainer>
-            <SeasonStage>{getSeasonStageName(date)}</SeasonStage>
-            <DateHeader>{formatTime(parsedDate)}</DateHeader>
-          </DateHeaderContainer>
-          <Nav date={date} today={today} />
-        </NavContainer>
-        <GamesContainer>
-          {
-            gameIds.length > 0
-              ? gameIds.map(
-              (gameId) => games[gameId]
-                ? <GamePreview
-                  data={games[gameId]}
-                  key={gameId}
-                  gameId={gameId}
-                  needUpdate={gamesToUpdate.some(gameToUpdate => gameToUpdate === gameId)}
-                />
-                : <GamePreviewLoader key={gameId} />,
-              )
-              : (<div style={{paddingLeft: ds.rem(ds.space)}}>No games on this day</div>)
-          }
-        </GamesContainer>
-      </ScheduleContainer>
+      <React.Fragment>
+        <LinkToInfo />
+        <Header />
+        <ScheduleContainer>
+          <NavContainer>
+            <DateHeaderContainer>
+              <SeasonStage>{getSeasonStageName(date)}</SeasonStage>
+              <DateHeader>{formatTime(parsedDate)}</DateHeader>
+            </DateHeaderContainer>
+            <Nav date={date} today={today} />
+          </NavContainer>
+          <GamesContainer>
+            {
+              gameIds.length > 0
+                ? gameIds.map(
+                (gameId) => games[gameId]
+                  ? <GamePreview
+                    data={games[gameId]}
+                    key={gameId}
+                    gameId={gameId}
+                    needUpdate={gamesToUpdate.some(gameToUpdate => gameToUpdate === gameId)}
+                  />
+                  : <GamePreviewLoader key={gameId} />,
+                )
+                : (<div style={{paddingLeft: ds.rem(ds.space)}}>No games on this day</div>)
+            }
+          </GamesContainer>
+        </ScheduleContainer>
+      </React.Fragment>
     );
   }
 }

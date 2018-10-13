@@ -13,6 +13,17 @@ const loading = keyframes`
   }
 `;
 
+const showLink = keyframes`
+  0% {
+    opacity: 0;
+    transform: translateY(-40px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0px);
+  }
+`;
+
 export const ScheduleContainer = styled.div`
   padding: ${ds.rem(ds.space)};
   max-width: ${ds.rem(ds.containerWidth)};
@@ -51,15 +62,15 @@ export const GamesContainer = styled.div`
 
 export const Title = styled.div`
   font-weight: 700;
-  font-size: ${ds.rem(24)};
+  font-size: ${ds.rem(26)};
   color: white;
   line-height: 1;
   text-align: center;
 `;
 
-export const Header = styled.div`
+export const HeaderContainer = styled.div`
   background: linear-gradient(-150deg, #597AC8F6, #B45ABFF6, #FF3D00F6);
-  padding: ${ds.rem(ds.space)} ${ds.rem(ds.space)} ${ds.rem(ds.space * 1.4)};
+  padding: ${ds.rem(ds.space / 4 * 3)} ${ds.rem(ds.space)} ${ds.rem(ds.space / 4 * 5)};
   position: sticky;
   top: 0;
   left: 0;
@@ -308,37 +319,39 @@ export const FormulaWrapper = styled.div`
   }
 `;
 
-export const Nav = styled.ul`
-  background-color: #00000022;
-  list-style: none;
-  color: white;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  padding: 0;
-  margin: auto;
-  width: 180px;
-  //grid-gap: ${ds.rem(ds.space / 2)};
-  // padding: ${ds.rem(ds.space / 4)} ${ds.rem(ds.space)};
-  border-radius: ${ds.rem(4)};
-`;
-
-export const NavItem = styled.li`
-  font-size: ${ds.rem(12)};
+export const NavItem = styled.div`
+  z-index: 3000;
+  animation: ${showLink} 0.2s ease-in;
+  font-size: ${ds.rem(11)};
   font-weight: 700;
   color: white;
+  line-height: 1;
   text-transform: uppercase;
   letter-spacing: ${ds.rem(2)};
   text-align: center;
+  border-radius: ${ds.rem(20)};
+  background-color: #00000022;
+  position: fixed;
+  top: ${ds.rem(ds.space / 4 * 3)};
+  ${({position}) => css`
+    ${position}: ${ds.rem(ds.space / 4 * 3)};
+`}
   & a {
     color: white;
     text-decoration: none;
     display: block;
     padding: ${ds.rem(ds.space / 4)} ${ds.rem(ds.space)};
-    &.active {
-      user-input: none;
-      opacity: 0.2;
-      pointer-events: none; 
-      user-select: none;
-    }
   }
+`;
+
+export const SubTitle = styled.div`
+  font-size: ${ds.rem(11)};
+  line-height: 1;
+  font-weight: 700;
+  color: white;
+  text-transform: uppercase;
+  letter-spacing: ${ds.rem(2)};
+  text-align: center;
+  border-radius: ${ds.rem(20)};
+  padding: ${ds.rem(ds.space / 4)}
 `;
