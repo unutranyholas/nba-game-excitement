@@ -296,7 +296,7 @@ export const ChartSvg = styled.svg`
 
 export const ContentContainer = styled.div`
   max-width: ${ds.rem(ds.containerWidth * 0.7)};
-  padding: 0 ${ds.rem(ds.space * 2)} ${ds.rem(ds.space * 2)};
+  padding: ${ds.rem(ds.space / 2)} ${ds.rem(ds.space * 2)} ${ds.rem(ds.space * 4)};
   font-size: ${ds.rem(18)};
   line-height: 1.44;
   margin: 0 auto;
@@ -308,11 +308,25 @@ export const ContentContainer = styled.div`
   & p {
     margin: 0 0 ${ds.rem(ds.space)};
   }
+  & a {
+    color: black;
+    text-decoration: none;
+    border-bottom: 1px solid #00000033;
+  }
+  & ul {
+    margin: 0;
+    padding: 0 0 0 ${ds.rem(ds.space * 1.5)};
+    list-style: square;
+  }
+   & li {
+    margin: 0 0 ${ds.rem(ds.space / 2)};
+    padding: 0;
+  }
 `;
 
 export const FormulaWrapper = styled.div`
   text-align: center;
-  padding: ${ds.rem(ds.space)};
+  padding: ${ds.rem(ds.space * 1.5)} 0 ${ds.rem(ds.space * 2.5)};
   white-space: nowrap;
   overflow-x: auto;
   & span {

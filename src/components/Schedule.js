@@ -13,9 +13,9 @@ import {LinkToInfo} from "./RootNav";
 
 const inputDate = "%Y%m%d";
 const outputDate = "%b %d, %Y";
-const parseUrlTime = timeParse(inputDate);
+export const parseUrlTime = timeParse(inputDate);
 export const formatUrlTime = timeFormat(inputDate);
-const formatTime = timeFormat(outputDate);
+export const formatTime = timeFormat(outputDate);
 const today = formatUrlTime(new Date());
 
 class ScheduleComponent extends React.PureComponent {
