@@ -1,9 +1,10 @@
 import React from "react";
-import {HashRouter as Router, Redirect, Route, Switch} from "react-router-dom";
-import {Header, SubTitle, Title} from "./components/Basic";
+import {HashRouter as Router, /*NavLink, */Redirect, Route, Switch} from "react-router-dom";
+import {Emoji, Header, /* Nav, NavItem, */Title} from "./components/Basic";
 import {Info} from "./components/Info";
 import {Schedule} from "./components/Schedule";
-// import logos from "./data/logos";
+
+/* eslint-disable jsx-a11y/accessible-emoji */
 
 const Charts = () => <h2>Charts</h2>;
 const Home = () => <Redirect to={`/games/`} />;
@@ -12,16 +13,16 @@ export const App = () => (
   <div>
     <Router basename={"/"}>
       <div>
-        {/*<img src={logos["NBA_logo"]} height="40" />*/}
         <Header>
-          <Title>NBA Game Excitement Rating</Title>
-          <SubTitle>Choose games worth watching (without spoilers)</SubTitle>
+          <Title>
+            Choose NBA&nbsp;<Emoji role="img" aria-label="Ball">🏀</Emoji>&nbsp;games worth watching with&nbsp;
+            <Emoji role="img" aria-label="Closed eyes">🙈</Emoji>&nbsp;no&nbsp;spoilers
+          </Title>
+          {/*<Nav>*/}
+          {/*<NavItem><NavLink to="/">Games</NavLink></NavItem>*/}
+          {/*<NavItem><NavLink to="/info">Info</NavLink></NavItem>*/}
+          {/*</Nav>*/}
         </Header>
-        {/*<ul>*/}
-        {/*<li><NavLink to="/games/">Games</NavLink></li>*/}
-        {/*<li><NavLink to="/info/">Info</NavLink></li>*/}
-        {/*<li><NavLink to="/charts/">Charts</NavLink></li>*/}
-        {/*</ul>*/}
         <Switch>
           <Route exact path={`/`} component={Home} />
           <Route path={`/info/`} component={Info} />

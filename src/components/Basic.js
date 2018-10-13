@@ -49,27 +49,28 @@ export const GamesContainer = styled.div`
   grid-gap: ${ds.rem(ds.space)};
 `;
 
-export const Header = styled.div`
-  padding: ${ds.rem(ds.space * 2)} 0;
-  background: linear-gradient(-150deg, #597AC8, #B45ABF, #FF3D00);
-`;
-
 export const Title = styled.div`
   font-weight: 700;
-  font-size: ${ds.rem(32)};
-  margin: 0 auto ${ds.rem(ds.space / 4)};
-  padding: 0 ${ds.rem(ds.space * 2)};
+  font-size: ${ds.rem(24)};
   color: white;
   line-height: 1;
-  max-width: 1000px;
+  text-align: center;
 `;
 
-export const SubTitle = styled.div`
-  font-size: ${ds.rem(16)};
-  margin: 0 auto;
-  padding: 0 ${ds.rem(ds.space * 2)};
-  color: white;
-  max-width: 1000px;
+export const Header = styled.div`
+  background: linear-gradient(-150deg, #597AC8F6, #B45ABFF6, #FF3D00F6);
+  padding: ${ds.rem(ds.space)} ${ds.rem(ds.space)} ${ds.rem(ds.space * 1.4)};
+  position: sticky;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+`;
+
+export const Emoji = styled.span`
+  font-size: 1.2em;
+  position: relative;
+  bottom: -0.15em;
 `;
 
 export const Time = styled.div`
@@ -131,7 +132,7 @@ export const PreviewLayout = styled.div`
   align-items: center;
   grid-gap: 0 ${ds.rem(ds.space / 2)};
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-  padding: ${ds.rem(ds.space / 4 * 3)};
+  padding: ${ds.rem(ds.space / 4 * 3)} ${ds.rem(ds.space)};
   border-radius: ${ds.rem(ds.space / 4)};
   background-color: white;
   height: ${ds.rem(ds.cardHeight)};
@@ -172,11 +173,13 @@ export const LogoPlaceholder = styled.div`
 
 export const SeasonStage = styled.div`
   font-size: ${ds.rem(12)};
+  line-height: 1;
   text-transform: uppercase;
   letter-spacing: ${ds.rem(3)};
   font-weight: 400;
   margin: 0;
   padding: 0;
+  min-height: ${ds.rem(12)};
 `;
 
 export const DateHeader = styled.div`
@@ -279,17 +282,63 @@ export const ChartSvg = styled.svg`
 `;
 
 export const ContentContainer = styled.div`
-  max-width: ${ds.rem(ds.containerWidth)};
-  padding: ${ds.rem(ds.space * 2)};
-  padding-right: ${ds.rem(ds.containerWidth * 0.2)};
+  max-width: ${ds.rem(ds.containerWidth * 0.7)};
+  padding: 0 ${ds.rem(ds.space * 2)} ${ds.rem(ds.space * 2)};
   font-size: ${ds.rem(18)};
   line-height: 1.44;
   margin: 0 auto;
-  font-feature-settings: "liga";
   & h2 {
-    margin: 0 0 ${ds.rem(ds.space / 2)};
+    font-size: ${ds.rem(24)};
+    margin: ${ds.rem(ds.space * 2)} 0 ${ds.rem(ds.space)};
+    line-height: 1;
   }
   & p {
-    margin: 0 0 ${ds.rem(ds.space / 2)};
+    margin: 0 0 ${ds.rem(ds.space)};
+  }
+`;
+
+export const FormulaWrapper = styled.div`
+  text-align: center;
+  padding: ${ds.rem(ds.space)};
+  white-space: nowrap;
+  overflow-x: auto;
+  & span {
+    font-family: "Space Grotesk", sans-serif;
+    font-style: normal!important;
+  }
+`;
+
+export const Nav = styled.ul`
+  background-color: #00000022;
+  list-style: none;
+  color: white;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  padding: 0;
+  margin: auto;
+  width: 180px;
+  //grid-gap: ${ds.rem(ds.space / 2)};
+  // padding: ${ds.rem(ds.space / 4)} ${ds.rem(ds.space)};
+  border-radius: ${ds.rem(4)};
+`;
+
+export const NavItem = styled.li`
+  font-size: ${ds.rem(12)};
+  font-weight: 700;
+  color: white;
+  text-transform: uppercase;
+  letter-spacing: ${ds.rem(2)};
+  text-align: center;
+  & a {
+    color: white;
+    text-decoration: none;
+    display: block;
+    padding: ${ds.rem(ds.space / 4)} ${ds.rem(ds.space)};
+    &.active {
+      user-input: none;
+      opacity: 0.2;
+      pointer-events: none; 
+      user-select: none;
+    }
   }
 `;

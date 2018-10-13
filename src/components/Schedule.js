@@ -4,6 +4,7 @@ import {connect} from "react-redux";
 import {fetchGames, updateGame, startUpdating} from "../actions";
 import {getGameIds} from "../data/games";
 import {getSeasonStageName} from "../data/games.js";
+import {ds} from "../designSystem";
 import {DateHeader, DateHeaderContainer, GamesContainer, NavContainer, ScheduleContainer, SeasonStage} from "./Basic";
 import {GamePreview, GamePreviewLoader} from "./GamePreview";
 import {Nav} from "./Nav";
@@ -84,7 +85,7 @@ class ScheduleComponent extends React.PureComponent {
                 />
                 : <GamePreviewLoader key={gameId} />,
               )
-              : (<div>No games on this day</div>)
+              : (<div style={{paddingLeft: ds.rem(ds.space)}}>No games on this day</div>)
           }
         </GamesContainer>
       </ScheduleContainer>
