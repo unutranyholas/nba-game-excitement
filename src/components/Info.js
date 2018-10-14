@@ -43,7 +43,7 @@ class InfoComponent extends React.Component {
           NBA API. I&nbsp;tried to&nbsp;figure out a&nbsp;formula, and my&nbsp;first attempt was this:
         </p>
         <FormulaWrapper>
-          <img src={Formula1} />
+          <img src={Formula1} alt="(Team 1 Max Lead + Team 2 Max Lead) / ABS(Final Difference)" />
         </FormulaWrapper>
         <p>This formula gave high results for games with impressive comebacks, but it&nbsp;wasn&rsquo;t the full answer
           about the tension of&nbsp;the game.
@@ -60,7 +60,10 @@ class InfoComponent extends React.Component {
           what&nbsp;I need pretty well.
         </p>
         <FormulaWrapper>
-          <img src={Formula2} />
+          <img
+            src={Formula2}
+            alt="2880 / (Game Length) sum(i = 2, Number of plays) abs(Win Probability(i) - Win Probability(i-1))"
+          />
         </FormulaWrapper>
         <p>In&nbsp;simple words, game excitement score is&nbsp;a&nbsp;sum of&nbsp;win probability changes during the
           game.
