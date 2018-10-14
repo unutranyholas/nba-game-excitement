@@ -309,7 +309,7 @@ export const ContentContainer = styled.div`
     margin: 0 0 ${ds.rem(ds.space)};
   }
   & a {
-    color: black;
+    color: #222222;
     text-decoration: none;
     border-bottom: 1px solid #00000033;
   }
