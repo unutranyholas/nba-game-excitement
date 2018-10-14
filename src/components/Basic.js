@@ -326,13 +326,10 @@ export const ContentContainer = styled.div`
 
 export const FormulaWrapper = styled.div`
   text-align: center;
-  padding: ${ds.rem(ds.space * 1.5)} 0 ${ds.rem(ds.space * 2.5)};
+  padding: ${ds.rem(ds.space / 2)} 0;
+  margin: ${ds.rem(ds.space * 1.5)} 0 ${ds.rem(ds.space)};
   white-space: nowrap;
   overflow-x: auto;
-  & span {
-    font-family: "Space Grotesk", sans-serif;
-    font-style: normal!important;
-  }
 `;
 
 export const NavItem = styled.div`
@@ -370,4 +367,16 @@ export const SubTitle = styled.div`
   text-align: center;
   border-radius: ${ds.rem(20)};
   padding: ${ds.rem(ds.space / 4)}
+`;
+
+export const InfoChartsContainer = styled.div`
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  grid-gap: ${ds.rem(ds.space)};
+  padding-bottom: ${ds.rem(ds.space * 2)};
+  & p {
+    margin: 0 ${ds.rem(ds.space / 3 * 2)} ${ds.rem(ds.space / 2)};
+    font-size: ${ds.rem(14)};
+    line-height: 1.2;
+  }  
 `;
