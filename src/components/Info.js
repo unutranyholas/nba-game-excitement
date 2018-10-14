@@ -5,6 +5,7 @@ import Formula1 from "../data/Formula1.svg";
 import Formula2 from "../data/Formula2.svg";
 import {ds} from "../designSystem";
 import {ContentContainer, FormulaWrapper} from "./Basic";
+import {DistChart} from "./DistChart";
 import {Header} from "./Header";
 import {InfoCharts} from "./InfoCharts";
 import {LinkToGames} from "./RootNav";
@@ -78,6 +79,9 @@ class InfoComponent extends React.Component {
         <p>I&nbsp;build a&nbsp;game excitement score distribution of&nbsp;the last four seasons NBA games (excluding
           preseason and all-star games).
         </p>
+        <div style={{height: ds.cardHeight, marginBottom: 12}}>
+          <DistChart />
+        </div>
         <p>According to&nbsp;that distribution<br />
           <span style={{marginLeft: ds.rem(ds.space / 2 * 3), display: "block"}}>
 top-1% games get rating 9.9,<br />

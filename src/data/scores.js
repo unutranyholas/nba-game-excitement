@@ -3,7 +3,78 @@ export const calculateScore = (gameExcitement) => {
   return ((score ? score.score : 100) - 1) / 10;
 };
 
-const scores = [
+export const bins = [
+  {
+    "bin": 0,
+    "count": 0,
+  },
+  {
+    "bin": 1,
+    "count": 36,
+  },
+  {
+    "bin": 2,
+    "count": 310,
+  },
+  {
+    "bin": 3,
+    "count": 611,
+  },
+  {
+    "bin": 4,
+    "count": 756,
+  },
+  {
+    "bin": 5,
+    "count": 789,
+  },
+  {
+    "bin": 6,
+    "count": 763,
+  },
+  {
+    "bin": 7,
+    "count": 724,
+  },
+  {
+    "bin": 8,
+    "count": 516,
+  },
+  {
+    "bin": 9,
+    "count": 385,
+  },
+  {
+    "bin": 10,
+    "count": 192,
+  },
+  {
+    "bin": 11,
+    "count": 87,
+  },
+  {
+    "bin": 12,
+    "count": 23,
+  },
+  {
+    "bin": 13,
+    "count": 10,
+  },
+  {
+    "bin": 14,
+    "count": 0,
+  },
+  {
+    "bin": 15,
+    "count": 1,
+  },
+];
+
+export const scores = [
+  {
+    "score": 0,
+    "border": 0,
+  },
   {
     "score": 1,
     "border": 2113,
