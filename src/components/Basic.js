@@ -137,6 +137,7 @@ export const LinkWrapper = styled.div`
 `;
 
 export const PreviewLayout = styled.div`
+  position: relative;
   user-select: none;
   display: grid;
   grid-template-columns: auto ${ds.rem(ds.logoSize)} 1fr auto;
@@ -148,9 +149,10 @@ export const PreviewLayout = styled.div`
   border-radius: ${ds.rem(ds.space / 4)};
   background-color: white;
   height: ${ds.rem(ds.cardHeight)};
+  overflow: hidden;
   ${({spoilerable}) => spoilerable && css`
-    cursor: pointer;
     transition: box-shadow 0.1s ease-out;
+    cursor: pointer;
     &:hover {
       box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
     }
@@ -225,9 +227,13 @@ export const ChartContainer = styled.div`
   border-radius: 4px;
   background-color: white;
   transition: box-shadow 0.1s ease-out;
-  &:hover {
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
-  }
+  ${({spoilerable}) => spoilerable && css`
+    transition: box-shadow 0.1s ease-out;
+    cursor: pointer;
+    &:hover {
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+    }
+  `}
 `;
 
 export const ChartTeamName = styled.div`
@@ -338,7 +344,7 @@ export const NavItem = styled.div`
   font-size: ${ds.rem(11)};
   font-weight: 700;
   color: white;
-  line-height: 1;
+  line-height: 0.99;
   text-transform: uppercase;
   letter-spacing: ${ds.rem(2)};
   text-align: center;
@@ -353,7 +359,7 @@ export const NavItem = styled.div`
     color: white;
     text-decoration: none;
     display: block;
-    padding: ${ds.rem(ds.space / 4)} ${ds.rem(ds.space / 4 * 3)} ${ds.rem(ds.space / 4 + 1)};
+    padding: ${ds.rem(ds.space / 4)} ${ds.rem(ds.space / 4 * 3)} ${ds.rem(ds.space / 4)};
   }
 `;
 
@@ -379,4 +385,33 @@ export const InfoChartsContainer = styled.div`
     font-size: ${ds.rem(14)};
     line-height: 1.2;
   }  
+`;
+
+export const SpoilButton = styled.div`
+  font-size: ${ds.rem(11)};
+  font-weight: 700;
+  color: white;
+  line-height: 1;
+  text-transform: uppercase;
+  letter-spacing: ${ds.rem(2)};
+  text-align: center;
+  border-radius: ${ds.rem(20)};
+  background-color: #000000CC;
+  padding: ${ds.rem(ds.space / 4)} ${ds.rem(ds.space / 4 * 3)} ${ds.rem(ds.space / 4 + 1)};
+  cursor: pointer;
+  &:hover {
+    background-color: #000000;
+  }
+`;
+
+export const SpoilWrapper = styled.div`
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  background-color: #ffffffcc;
 `;

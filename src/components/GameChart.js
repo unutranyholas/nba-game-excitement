@@ -9,7 +9,7 @@ import {ChartContainer, ChartTeamName, ChartScore, QuarterLine, WinProbPath, Fif
 const chartSize = {width: ds.cardWidth, height: ds.cardHeight, margin: ds.space / 2};
 const quarters = [0, 720, 1440, 2160, 2880, 3180, 3480, 3780, 4080, 4380];
 
-export const GameChart = ({data: {gameData, winProbsLog: {winProbsLog}}}) => {
+export const GameChart = ({spoilerable, data: {gameData, winProbsLog: {winProbsLog}}}) => {
 
   if (!winProbsLog) {
     return <div />;
@@ -36,7 +36,7 @@ export const GameChart = ({data: {gameData, winProbsLog: {winProbsLog}}}) => {
   const vTeamColor = (vTeam && vTeam.color) ? vTeam.color : "#666";
   const hTeamColor = (hTeam && hTeam.color) ? hTeam.color : "#999";
   return (
-    <ChartContainer>
+    <ChartContainer spoilerable={spoilerable}>
       <ChartTeamName color={vTeamColor} position="top">
         {gameData.vTeam.triCode}
       </ChartTeamName>

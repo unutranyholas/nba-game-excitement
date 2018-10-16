@@ -4,20 +4,36 @@ import logos from "../data/logos";
 import {calculateScore} from "../data/scores";
 import {getTeam} from "../data/teams";
 import {ds} from "../designSystem";
-import {Logo, LogoPlaceholder, PreviewLayout, Score, TeamName, Time, LiveBadge, ScoreContainer} from "./Basic";
+import {
+  Logo,
+  LogoPlaceholder,
+  PreviewLayout,
+  Score,
+  TeamName,
+  Time,
+  LiveBadge,
+  ScoreContainer,
+  SpoilButton, SpoilWrapper,
+} from "./Basic";
 import {GameChart} from "./GameChart";
 
 export const formatTime = timeFormat("%H:%M");
 
 export class GamePreview extends React.Component {
   state = {
-    spoiled: false,
+    spoiled: 0,
   };
 
-  toggleSpoiler = () => {
+  toggleSpoiler = (e) => {
     this.setState(({spoiled}) => ({
-      spoiled: !spoiled,
+      spoiled: (spoiled + 1) % 3,
     }));
+    e.stopPropagation();
+  };
+
+  resetSpoiler = (e) => {
+    this.setState({spoiled: 0});
+    e.stopPropagation();
   };
 
   render() {
@@ -33,14 +49,14 @@ export class GamePreview extends React.Component {
     const tooltip = gameExcitement
       ? `Game excitement is ${(gameExcitement / 1000).toFixed(3)}, it's higher than ${score * 10}% games in 2014—2018`
       : "";
-    return spoiled
+    return spoiled === 2
       ? <div onClick={this.toggleSpoiler} style={{height: ds.rem(ds.cardHeight)}}>
-        <GameChart data={data} />
+        <GameChart data={data} spoilerable={statusNum > 1} />
       </div>
-      : <PreviewLayout
-        onClick={statusNum > 1 ? this.toggleSpoiler : null}
-        spoilerable={statusNum > 1}
-      >
+      : <PreviewLayout spoilerable={statusNum > 1} onClick={statusNum > 1 ? this.toggleSpoiler : null}>
+        {statusNum > 1 && spoiled === 1 && <SpoilWrapper onClick={this.resetSpoiler}>
+          <SpoilButton onClick={this.toggleSpoiler}>Show result</SpoilButton>
+        </SpoilWrapper>}
         <Time>{formatTime(time)}</Time>
         <div>
           {logos[`${vTeam.triCode}_logo`]
