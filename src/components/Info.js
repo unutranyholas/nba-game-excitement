@@ -112,7 +112,7 @@ top-3%&nbsp;&mdash; 9.7..., etc.
         </h2>
         <ul>
           <li>Backend: Node, Express.js, Postgres, Heroku;</li>
-          <li>Frontend: React, Redux, D3, Styled-Components, Google Pages;</li>
+          <li>Frontend: React, Redux, D3, Styled-Components, Github Pages;</li>
           <li>Font: <a href="https://fonts.floriankarsten.com/space-grotesk">Space Grotesk</a>;</li>
         </ul>
       </ContentContainer>
