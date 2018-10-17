@@ -1,5 +1,14 @@
 import {combineReducers} from "redux";
 
+export const defaultDate = (state = null, action) => {
+  switch (action.type) {
+    case "SAVE_DEFAULT_DATE":
+      return action.date;
+    default:
+      return state;
+  }
+};
+
 export const games = (state = {}, action) => {
   switch (action.type) {
     case "SAVE_GAMES":
@@ -55,4 +64,5 @@ export const rootReducer = combineReducers({
   games,
   loadedDates,
   gamesToUpdate,
+  defaultDate,
 });

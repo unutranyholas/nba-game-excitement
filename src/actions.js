@@ -1,3 +1,15 @@
+export const getDefaultDate = () => {
+  return async (dispatch) => {
+    try {
+      const {date} = await fetchClosestDate();
+      dispatch(saveDefaultDate({date}));
+    } catch (ex) {
+      console.log(ex);
+      // dispatch(showError(ex));
+    }
+  };
+};
+
 export const fetchGames = (payload) => {
   return async (dispatch) => {
     try {
@@ -22,6 +34,11 @@ export const updateGame = (payload) => {
   };
 };
 
+export const saveDefaultDate = (payload) => ({
+  type: "SAVE_DEFAULT_DATE",
+  ...payload,
+});
+
 export const saveGames = (payload) => ({
   type: "SAVE_GAMES",
   ...payload,
@@ -37,8 +54,8 @@ export const startUpdating = (payload) => ({
   ...payload,
 });
 
-// const serverUrl = "http://localhost:5000";
-const serverUrl = "https://nba-game-excitement.herokuapp.com";
+const serverUrl = "http://localhost:5000";
+// const serverUrl = "https://nba-game-excitement.herokuapp.com";
 
 const fetchGameById = async (gameId) => {
   const response = await fetch(`${serverUrl}/games/${gameId}`);
@@ -50,3 +67,7 @@ const fetchGamesByDate = async (date) => {
   return response.json();
 };
 
+const fetchClosestDate = async () => {
+  const response = await fetch(`${serverUrl}/redirect_to`);
+  return response.json();
+};

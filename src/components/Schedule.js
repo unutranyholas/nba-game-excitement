@@ -1,7 +1,7 @@
 import {timeFormat, timeParse} from "d3-time-format";
 import React from "react";
 import {connect} from "react-redux";
-import {fetchGames, startUpdating, updateGame} from "../actions";
+import {fetchGames, getDefaultDate, startUpdating, updateGame} from "../actions";
 import {getGameIds} from "../data/games";
 import {getSeasonStageName} from "../data/games.js";
 import {ds} from "../designSystem";
@@ -42,7 +42,10 @@ class ScheduleComponent extends React.PureComponent {
   };
 
   componentDidMount() {
-    const {loadedDates, date, fetchGames} = this.props;
+    const {loadedDates, date, fetchGames, getDefaultDate} = this.props;
+    if (!date) {
+      getDefaultDate();
+    }
     if (!loadedDates.some(loadedDate => loadedDate === date)) {
       fetchGames({date});
     }
@@ -62,8 +65,9 @@ class ScheduleComponent extends React.PureComponent {
 
   render() {
     const {games, gamesToUpdate, date} = this.props;
-    const parsedDate = parseUrlTime(date);
-    const gameIds = getGameIds(date);
+    const maybeDate = date || today;
+    const parsedDate = parseUrlTime(maybeDate);
+    const gameIds = getGameIds(maybeDate);
 
     return (
       <React.Fragment>
@@ -72,10 +76,10 @@ class ScheduleComponent extends React.PureComponent {
         <ScheduleContainer>
           <NavContainer>
             <DateHeaderContainer>
-              <SeasonStage>{getSeasonStageName(date)}</SeasonStage>
+              <SeasonStage>{getSeasonStageName(maybeDate)}</SeasonStage>
               <DateHeader>{formatTime(parsedDate)}</DateHeader>
             </DateHeaderContainer>
-            <Nav date={date} today={today} />
+            <Nav date={maybeDate} today={today} />
           </NavContainer>
           <GamesContainer>
             {
@@ -100,12 +104,12 @@ class ScheduleComponent extends React.PureComponent {
 }
 
 export const Schedule = connect(
-  ({games, loadedDates, gamesToUpdate, liveGames}, ownProps) => ({
+  ({games, loadedDates, gamesToUpdate, liveGames, defaultDate}, ownProps) => ({
     games,
     loadedDates,
     gamesToUpdate, //TODO: filter games only from current date
     liveGames,
-    date: ownProps.match.params.date || today,
+    date: ownProps.match.params.date || defaultDate,
   }),
-  {fetchGames, updateGame, startUpdating},
+  {fetchGames, updateGame, startUpdating, getDefaultDate},
 )(ScheduleComponent);
