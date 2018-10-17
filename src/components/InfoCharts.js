@@ -11,7 +11,7 @@ export const InfoCharts = ({boringGame, excitingGame}) => {
         <div style={{height: ds.cardHeight, marginBottom: 12}}>
           <GameChart data={boringGame} />
         </div>
-        <p>{formatTime(parseUrlTime(boringGame.date))}. Feb&nbsp;07, 2018. Spurs took the lead in&nbsp;the first quarter
+        <p>{formatTime(parseUrlTime(boringGame.date))}. Spurs took the lead in&nbsp;the first quarter
           against Suns and kept it&nbsp;for the whole game. </p>
         <p>Game Excitement
           Score: <strong>{boringGame.gameExcitement / 1000}</strong></p>
@@ -20,7 +20,7 @@ export const InfoCharts = ({boringGame, excitingGame}) => {
         <div style={{height: ds.cardHeight, marginBottom: 12}}>
           <GameChart data={excitingGame} />
         </div>
-        <p>{formatTime(parseUrlTime(excitingGame.date))}. Jan&nbsp;29, 2017. Knicks and Hawks needed 4&nbsp;exhausting
+        <p>{formatTime(parseUrlTime(excitingGame.date))}. Knicks and Hawks needed 4&nbsp;exhausting
           overtimes to&nbsp;reveal the winner. </p>
         <p>Game Excitement
           Score: <strong>{excitingGame.gameExcitement / 1000}</strong></p>

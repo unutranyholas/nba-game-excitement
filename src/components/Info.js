@@ -89,12 +89,6 @@ class InfoComponent extends React.Component {
         </p>
         <InfoCharts boringGame={boringGame} excitingGame={excitingGame} />
         <p>
-          Spurs took the lead in&nbsp;the first quarter against Suns and kept it&nbsp;for the whole game.
-        </p>
-        <p>
-          Knicks and Hawks needed 4&nbsp;exhausting overtimes to&nbsp;reveal the winner.
-        </p>
-        <p>
           As&nbsp;you can see the game excitement score is&nbsp;an&nbsp;entirely abstract number in&nbsp;the range from
           1&nbsp;to&nbsp;16. But people like a&nbsp;10-point scale, so&nbsp;I needed to&nbsp;normalize the score
           somehow.
