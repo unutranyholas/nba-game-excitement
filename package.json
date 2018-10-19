@@ -1,6 +1,6 @@
 {
   "name": "nba-game-excitement-client",
-  "homepage": "http://worthwatch.in/",
+  "homepage": "http://worthwatch.in",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
