@@ -1,5 +1,5 @@
 import React from "react";
-import {HashRouter as Router, Redirect, Route, Switch} from "react-router-dom";
+import {BrowserRouter as Router, Redirect, Route, Switch} from "react-router-dom";
 import {Info} from "./components/Info";
 import {Schedule} from "./components/Schedule";
 
