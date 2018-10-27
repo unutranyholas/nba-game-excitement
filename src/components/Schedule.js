@@ -1,7 +1,7 @@
 import {timeFormat, timeParse} from "d3-time-format";
 import React from "react";
 import {connect} from "react-redux";
-import {fetchGames, getDefaultDate, startUpdating, updateGame} from "../actions";
+import {fetchGames, getDefaultDate, spoilGame, startUpdating, unspoilGame, updateGame} from "../actions";
 import {getGameIds} from "../data/games";
 import {getSeasonStageName} from "../data/games.js";
 import {ds} from "../designSystem";
@@ -63,8 +63,20 @@ class ScheduleComponent extends React.PureComponent {
     clearInterval(this.updateInterval);
   }
 
+  spoilGame = (gameId) => {
+    return () => {
+      this.props.spoilGame(gameId);
+    };
+  };
+
+  unspoilGame = (gameId) => {
+    return () => {
+      this.props.unspoilGame(gameId);
+    };
+  };
+
   render() {
-    const {games, gamesToUpdate, date} = this.props;
+    const {games, gamesToUpdate, date, spoiledGames} = this.props;
     const maybeDate = date || today;
     const parsedDate = parseUrlTime(maybeDate);
     const gameIds = getGameIds(maybeDate);
@@ -85,14 +97,19 @@ class ScheduleComponent extends React.PureComponent {
             {
               gameIds.length > 0
                 ? gameIds.map(
-                (gameId) => games[gameId]
-                  ? <GamePreview
-                    data={games[gameId]}
-                    key={gameId}
-                    gameId={gameId}
-                    needUpdate={gamesToUpdate.some(gameToUpdate => gameToUpdate === gameId)}
-                  />
-                  : <GamePreviewLoader key={gameId} />,
+                (gameId) => {
+                  const spoiled = spoiledGames.includes(gameId);
+                  return games[gameId]
+                    ? <GamePreview
+                      data={games[gameId]}
+                      key={gameId}
+                      gameId={gameId}
+                      needUpdate={gamesToUpdate.some(gameToUpdate => gameToUpdate === gameId)}
+                      spoiled={spoiled}
+                      onClick={spoiled ? this.unspoilGame({gameId}) : this.spoilGame({gameId})}
+                    />
+                    : <GamePreviewLoader key={gameId} />;
+                },
                 )
                 : (<div style={{paddingLeft: ds.rem(ds.space)}}>No games on this day</div>)
             }
@@ -104,12 +121,13 @@ class ScheduleComponent extends React.PureComponent {
 }
 
 export const Schedule = connect(
-  ({games, loadedDates, gamesToUpdate, liveGames, defaultDate}, ownProps) => ({
+  ({games, loadedDates, gamesToUpdate, liveGames, defaultDate, spoiledGames}, ownProps) => ({
     games,
     loadedDates,
     gamesToUpdate, //TODO: filter games only from current date
     liveGames,
     date: ownProps.match.params.date || defaultDate,
+    spoiledGames,
   }),
-  {fetchGames, updateGame, startUpdating, getDefaultDate},
+  {fetchGames, updateGame, startUpdating, getDefaultDate, spoilGame, unspoilGame},
 )(ScheduleComponent);

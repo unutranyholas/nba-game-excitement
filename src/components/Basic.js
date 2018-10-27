@@ -82,6 +82,9 @@ export const Emoji = styled.span`
   font-size: 1.2em;
   position: relative;
   bottom: -0.15em;
+    ${({clickable}) => clickable && css`
+    cursor: pointer;
+  `}
 `;
 
 export const Time = styled.div`

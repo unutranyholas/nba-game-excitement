@@ -37,6 +37,19 @@ export const loadedDates = (state = [], action) => {
   }
 };
 
+export const spoiledGames = (state = [], action) => {
+  switch (action.type) {
+    case "SPOIL_GAME":
+      return [...state, action.gameId];
+    case "UNSPOIL_GAME":
+      return [...state.filter(gameId => gameId !== action.gameId)];
+    case "UNSPOIL_ALL_GAMES":
+      return [];
+    default:
+      return state;
+  }
+};
+
 export const gamesToUpdate = (state = [], action) => {
   switch (action.type) {
     case "SAVE_GAMES":
@@ -65,4 +78,5 @@ export const rootReducer = combineReducers({
   loadedDates,
   gamesToUpdate,
   defaultDate,
+  spoiledGames,
 });

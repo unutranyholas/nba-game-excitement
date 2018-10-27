@@ -54,6 +54,20 @@ export const startUpdating = (payload) => ({
   ...payload,
 });
 
+export const spoilGame = (payload) => ({
+  type: "SPOIL_GAME",
+  ...payload,
+});
+
+export const unspoilGame = (payload) => ({
+  type: "UNSPOIL_GAME",
+  ...payload,
+});
+
+export const unspoilAllGames = (payload) => ({
+  type: "UNSPOIL_ALL_GAMES",
+});
+
 // const serverUrl = "http://localhost:5000";
 const serverUrl = "https://nba-game-excitement.herokuapp.com";
 
