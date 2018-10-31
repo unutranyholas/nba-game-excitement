@@ -15,7 +15,7 @@ const teams = [
     "urlName": "hawks",
     "confName": "East",
     "divName": "Southeast",
-    "colors": ["#E03A3E", "#C1D32F"],
+    "colors": ["#E03A3E", "#E03A3E"],
   },
   {
     "isNBAFranchise": true,
