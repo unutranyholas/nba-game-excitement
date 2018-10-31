@@ -1,5 +1,6 @@
 import React from "react";
 import _ from "lodash";
+import {distance} from "chroma-js";
 import {scaleLinear} from "d3-scale";
 import {line, curveNatural} from "d3-shape";
 import {getTeam} from "../data/teams";
@@ -10,7 +11,6 @@ const chartSize = {width: ds.cardWidth, height: ds.cardHeight, margin: ds.space 
 const quarters = [0, 720, 1440, 2160, 2880, 3180, 3480, 3780, 4080, 4380];
 
 export const GameChart = ({spoilerable, data: {gameData, winProbsLog: {winProbsLog}}}) => {
-
   if (!winProbsLog) {
     return <div />;
   }
@@ -33,8 +33,16 @@ export const GameChart = ({spoilerable, data: {gameData, winProbsLog: {winProbsL
   const path = winProbLine(log);
   const vTeam = getTeam(gameData.vTeam.triCode);
   const hTeam = getTeam(gameData.hTeam.triCode);
-  const vTeamColor = (vTeam && vTeam.color) ? vTeam.color : "#666";
-  const hTeamColor = (hTeam && hTeam.color) ? hTeam.color : "#999";
+  const vTeamColors = (vTeam && vTeam.colors) ? vTeam.colors : ["#666666", "#999999"];
+  const hTeamColors = (hTeam && hTeam.colors) ? hTeam.colors : ["#666666", "#999999"];
+
+  const colorPairs = vTeamColors
+    .reduce((colors, vColor) =>
+        [...colors, ...hTeamColors.map(hColor => [vColor, hColor])],
+      [])
+    .slice(0, -1);
+
+  const [vTeamColor, hTeamColor] = _.maxBy(colorPairs, ([vColor, hColor]) => distance(vColor, hColor, "lab"));
   return (
     <ChartContainer spoilerable={spoilerable}>
       <ChartTeamName color={vTeamColor} position="top">
