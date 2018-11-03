@@ -54,17 +54,12 @@ export const startUpdating = (payload) => ({
   ...payload,
 });
 
-export const spoilGame = (payload) => ({
-  type: "SPOIL_GAME",
+export const toggleSpoiler = (payload) => ({
+  type: "TOGGLE_SPOILER",
   ...payload,
 });
 
-export const unspoilGame = (payload) => ({
-  type: "UNSPOIL_GAME",
-  ...payload,
-});
-
-export const unspoilAllGames = (payload) => ({
+export const unspoilAllGames = () => ({
   type: "UNSPOIL_ALL_GAMES",
 });
 

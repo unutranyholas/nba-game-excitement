@@ -1,7 +1,7 @@
 import {timeFormat, timeParse} from "d3-time-format";
 import React from "react";
 import {connect} from "react-redux";
-import {fetchGames, getDefaultDate, spoilGame, startUpdating, unspoilGame, updateGame} from "../actions";
+import {fetchGames, getDefaultDate, startUpdating, toggleSpoiler, updateGame} from "../actions";
 import {getGameIds} from "../data/games";
 import {getSeasonStageName} from "../data/games.js";
 import {ds} from "../designSystem";
@@ -63,20 +63,8 @@ class ScheduleComponent extends React.PureComponent {
     clearInterval(this.updateInterval);
   }
 
-  spoilGame = (gameId) => {
-    return () => {
-      this.props.spoilGame(gameId);
-    };
-  };
-
-  unspoilGame = (gameId) => {
-    return () => {
-      this.props.unspoilGame(gameId);
-    };
-  };
-
   render() {
-    const {games, gamesToUpdate, date, spoiledGames} = this.props;
+    const {games, gamesToUpdate, date, spoiledGames, toggleSpoiler} = this.props;
     const maybeDate = date || today;
     const parsedDate = parseUrlTime(maybeDate);
     const gameIds = getGameIds(maybeDate);
@@ -106,7 +94,7 @@ class ScheduleComponent extends React.PureComponent {
                       gameId={gameId}
                       needUpdate={gamesToUpdate.some(gameToUpdate => gameToUpdate === gameId)}
                       spoiled={spoiled}
-                      onClick={spoiled ? this.unspoilGame({gameId}) : this.spoilGame({gameId})}
+                      onClick={() => toggleSpoiler({gameId})}
                     />
                     : <GamePreviewLoader key={gameId} />;
                 },
@@ -129,5 +117,5 @@ export const Schedule = connect(
     date: ownProps.match.params.date || defaultDate,
     spoiledGames,
   }),
-  {fetchGames, updateGame, startUpdating, getDefaultDate, spoilGame, unspoilGame},
+  {fetchGames, updateGame, startUpdating, getDefaultDate, toggleSpoiler},
 )(ScheduleComponent);

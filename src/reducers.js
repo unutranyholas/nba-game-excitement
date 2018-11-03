@@ -39,12 +39,12 @@ export const loadedDates = (state = [], action) => {
 
 export const spoiledGames = (state = [], action) => {
   switch (action.type) {
-    case "SPOIL_GAME":
-      return [...state, action.gameId];
-    case "UNSPOIL_GAME":
-      return [...state.filter(gameId => gameId !== action.gameId)];
     case "UNSPOIL_ALL_GAMES":
       return [];
+    case "TOGGLE_SPOILER":
+      return state.includes(action.gameId)
+        ? [...state.filter(gameId => gameId !== action.gameId)]
+        : [...state, action.gameId];
     default:
       return state;
   }
