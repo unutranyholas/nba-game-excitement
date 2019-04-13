@@ -3,7 +3,7 @@ import _ from "lodash";
 import {distance} from "chroma-js";
 import {scaleLinear} from "d3-scale";
 import {line, curveNatural} from "d3-shape";
-import {getTeam} from "../data/teams";
+import {getTeamById} from "../data/teams";
 import {ds} from "../designSystem";
 import {ChartContainer, ChartTeamName, ChartScore, QuarterLine, WinProbPath, FiftyPercentLine, ChartSvg} from "./Basic";
 
@@ -31,8 +31,8 @@ export const GameChart = ({spoilerable, data: {gameData, winProbsLog: {winProbsL
     .curve(curveNatural);
 
   const path = winProbLine(log);
-  const vTeam = getTeam(gameData.vTeam.triCode);
-  const hTeam = getTeam(gameData.hTeam.triCode);
+  const vTeam = getTeamById(gameData.vTeam.teamId);
+  const hTeam = getTeamById(gameData.hTeam.teamId);
   const vTeamColors = (vTeam && vTeam.colors) ? vTeam.colors : ["#666666", "#999999"];
   const hTeamColors = (hTeam && hTeam.colors) ? hTeam.colors : ["#666666", "#999999"];
 

@@ -1,5 +1,5 @@
-export const getTeam = (tricode) => {
-  return teams.find((team) => team.tricode === tricode);
+export const getTeamById = (id) => {
+  return teams.find((team) => team.teamId === id);
 };
 
 const teams = [

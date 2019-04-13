@@ -37,6 +37,15 @@ export const loadedDates = (state = [], action) => {
   }
 };
 
+export const allDates = (state = null, action) => {
+  switch (action.type) {
+    case "SAVE_ALL_DATES":
+      return action.allDates;
+    default:
+      return state;
+  }
+};
+
 export const spoiledGames = (state = [], action) => {
   switch (action.type) {
     case "UNSPOIL_ALL_GAMES":
@@ -79,4 +88,5 @@ export const rootReducer = combineReducers({
   gamesToUpdate,
   defaultDate,
   spoiledGames,
+  allDates,
 });

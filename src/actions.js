@@ -22,6 +22,18 @@ export const fetchGames = (payload) => {
   };
 };
 
+export const fetchDates = () => {
+  return async (dispatch) => {
+    try {
+      const dates = await fetchAllDates();
+      dispatch(saveAllDates({allDates: dates}));
+    } catch (ex) {
+      console.log(ex);
+      // dispatch(showError(ex));
+    }
+  };
+};
+
 export const updateGame = (payload) => {
   return async (dispatch) => {
     try {
@@ -41,6 +53,11 @@ export const saveDefaultDate = (payload) => ({
 
 export const saveGames = (payload) => ({
   type: "SAVE_GAMES",
+  ...payload,
+});
+
+export const saveAllDates = (payload) => ({
+  type: "SAVE_ALL_DATES",
   ...payload,
 });
 
@@ -78,5 +95,10 @@ const fetchGamesByDate = async (date) => {
 
 const fetchClosestDate = async () => {
   const response = await fetch(`${serverUrl}/redirect_to`);
+  return response.json();
+};
+
+const fetchAllDates = async () => {
+  const response = await fetch(`${serverUrl}/allDates`);
   return response.json();
 };

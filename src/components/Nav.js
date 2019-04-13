@@ -1,7 +1,8 @@
 import {timeFormat, timeParse} from "d3-time-format";
 import React from "react";
+import {connect} from "react-redux";
 import {Link} from "react-router-dom";
-import {gamesCount, getPrevNextDays} from "../data/games";
+import {getPrevNextDays} from "../data/games";
 import {LinkWrapper, NavButtons} from "./Basic";
 
 const inputDate = "%Y%m%d";
@@ -10,8 +11,11 @@ const parseUrlTime = timeParse(inputDate);
 const formatTime = timeFormat(outputDate);
 const baseUrlPart = "/games/";
 
-export const Nav = ({date, today}) => {
-  const {nextDay, prevDay} = getPrevNextDays({date, gamesCount});
+export const NavComponent = ({date, today, allDates}) => {
+  if (!allDates) {
+    return null;
+  }
+  const {nextDay, prevDay} = getPrevNextDays({date, allDates});
   return (
     <NavButtons>
       <LinkWrapper first>{prevDay ?
@@ -23,3 +27,8 @@ export const Nav = ({date, today}) => {
     </NavButtons>
   );
 };
+
+export const Nav = connect(
+  ({allDates}) => ({allDates}),
+  {},
+)(NavComponent);

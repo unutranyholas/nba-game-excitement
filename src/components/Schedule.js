@@ -1,7 +1,14 @@
 import {timeFormat, timeParse} from "d3-time-format";
 import React from "react";
 import {connect} from "react-redux";
-import {fetchGames, getDefaultDate, startUpdating, toggleSpoiler, updateGame} from "../actions";
+import {
+  fetchGames,
+  getDefaultDate,
+  startUpdating,
+  toggleSpoiler,
+  updateGame,
+  fetchDates,
+} from "../actions";
 import {getGameIds} from "../data/games";
 import {getSeasonStageName} from "../data/games.js";
 import {ds} from "../designSystem";
@@ -42,7 +49,10 @@ class ScheduleComponent extends React.PureComponent {
   };
 
   componentDidMount() {
-    const {loadedDates, date, fetchGames, getDefaultDate} = this.props;
+    const {loadedDates, date, fetchGames, getDefaultDate, allDates, fetchDates} = this.props;
+    if (!allDates) {
+      fetchDates();
+    }
     if (!date) {
       getDefaultDate();
     }
@@ -64,11 +74,11 @@ class ScheduleComponent extends React.PureComponent {
   }
 
   render() {
-    const {games, gamesToUpdate, date, spoiledGames, toggleSpoiler} = this.props;
+    const {games, gamesToUpdate, date, spoiledGames, toggleSpoiler, allDates} = this.props;
     const maybeDate = date || today;
     const parsedDate = parseUrlTime(maybeDate);
-    const gameIds = getGameIds(maybeDate);
-
+    const gameIds = getGameIds(maybeDate, allDates);
+    console.log({gameIds});
     return (
       <React.Fragment>
         <LinkToInfo />
@@ -76,7 +86,7 @@ class ScheduleComponent extends React.PureComponent {
         <ScheduleContainer>
           <NavContainer>
             <DateHeaderContainer>
-              <SeasonStage>{getSeasonStageName(maybeDate)}</SeasonStage>
+              <SeasonStage>{getSeasonStageName(maybeDate, allDates)}</SeasonStage>
               <DateHeader>{formatTime(parsedDate)}</DateHeader>
             </DateHeaderContainer>
             <Nav date={maybeDate} today={today} />
@@ -109,13 +119,14 @@ class ScheduleComponent extends React.PureComponent {
 }
 
 export const Schedule = connect(
-  ({games, loadedDates, gamesToUpdate, liveGames, defaultDate, spoiledGames}, ownProps) => ({
+  ({games, loadedDates, gamesToUpdate, liveGames, defaultDate, spoiledGames, allDates}, ownProps) => ({
     games,
     loadedDates,
     gamesToUpdate, //TODO: filter games only from current date
     liveGames,
     date: ownProps.match.params.date || defaultDate,
     spoiledGames,
+    allDates,
   }),
-  {fetchGames, updateGame, startUpdating, getDefaultDate, toggleSpoiler},
+  {fetchGames, updateGame, startUpdating, getDefaultDate, toggleSpoiler, fetchDates},
 )(ScheduleComponent);
