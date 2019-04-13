@@ -93,23 +93,25 @@ class ScheduleComponent extends React.PureComponent {
           </NavContainer>
           <GamesContainer>
             {
-              gameIds.length > 0
+              gameIds
+                ? gameIds.length > 0
                 ? gameIds.map(
-                (gameId) => {
-                  const spoiled = spoiledGames.includes(gameId);
-                  return games[gameId]
-                    ? <GamePreview
-                      data={games[gameId]}
-                      key={gameId}
-                      gameId={gameId}
-                      needUpdate={gamesToUpdate.some(gameToUpdate => gameToUpdate === gameId)}
-                      spoiled={spoiled}
-                      onClick={() => toggleSpoiler({gameId})}
-                    />
-                    : <GamePreviewLoader key={gameId} />;
-                },
+                  (gameId) => {
+                    const spoiled = spoiledGames.includes(gameId);
+                    return games[gameId]
+                      ? <GamePreview
+                        data={games[gameId]}
+                        key={gameId}
+                        gameId={gameId}
+                        needUpdate={gamesToUpdate.some(gameToUpdate => gameToUpdate === gameId)}
+                        spoiled={spoiled}
+                        onClick={() => toggleSpoiler({gameId})}
+                      />
+                      : <GamePreviewLoader key={gameId} />;
+                  },
                 )
                 : (<div style={{paddingLeft: ds.rem(ds.space)}}>No games on this day</div>)
+                : <><GamePreviewLoader /><GamePreviewLoader /></>
             }
           </GamesContainer>
         </ScheduleContainer>

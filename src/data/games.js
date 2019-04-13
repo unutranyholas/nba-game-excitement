@@ -26,7 +26,7 @@ export const getSeasonStageName = (date, allDates) => {
 
 export const getGameIds = (date, allDates) => {
   if (!allDates) {
-    return [];
+    return null;
   }
   const gameDay = allDates.find(gameDay => gameDay.date === date);
   return gameDay
